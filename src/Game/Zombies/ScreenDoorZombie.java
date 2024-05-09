@@ -1,5 +1,6 @@
 package Game.Zombies;
+import Game.AbstractClass.Zombie;
 
-public class ScreenDoorZombie {
+public class ScreenDoorZombie extends Zombie {
     
 }

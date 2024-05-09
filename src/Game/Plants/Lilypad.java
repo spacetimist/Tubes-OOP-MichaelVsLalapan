@@ -1,5 +1,6 @@
 package Game.Plants;
+import Game.AbstractClass.Plant;
 
-public class Lilypad {
+public class Lilypad extends Plant {
     
 }

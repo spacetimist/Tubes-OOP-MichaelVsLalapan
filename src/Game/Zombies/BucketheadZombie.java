@@ -1,5 +1,7 @@
 package Game.Zombies;
+import Game.AbstractClass.Zombie;
 
-public class BucketheadZombie {
+
+public class BucketheadZombie extends Zombie {
     
 }
