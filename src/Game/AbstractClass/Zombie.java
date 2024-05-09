@@ -1,5 +1,5 @@
 package Game.AbstractClass;
 
-public abstract class Zombie {
+public abstract class Zombie extends Character {
     
 }

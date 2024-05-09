@@ -1,5 +1,5 @@
 package Game.AbstractClass;
 
-public abstract class Plant {
+public abstract class Plant extends Character {
     
 }
