@@ -1,21 +1,8 @@
 package main;
-import javax.swing.JFrame;
-import main.GUI.GamePanel;
-
+import main.GUI.*;
 
 public class Main {
-    public static void main(String[] args) {
-        JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("Michael Vs. Lalapan");
-
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
-
-        window.pack();
-
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
+    public static void main(String[] args){
+        Game.startGame();
     }
 }

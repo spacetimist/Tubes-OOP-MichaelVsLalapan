@@ -1,4 +1,4 @@
-package main.Game.AbstractClass;
+package main.Game.ParentClass;
 
 public abstract class Area {
     
