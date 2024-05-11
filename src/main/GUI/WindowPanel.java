@@ -2,6 +2,7 @@ package main.GUI;
 
 import main.Game.Map.Map;
 import main.Game.Plants.Cactus;
+import main.Game.Zombies.NormalZombie;
 
 import java.awt.*;
 
@@ -24,7 +25,7 @@ public class WindowPanel extends JPanel implements Runnable {
     Thread gameThread;
     // initialize plants
     Cactus cactus = new Cactus(this, keyH);
-    // Plant plant = new Plant(this, keyH);
+    NormalZombie normal = new NormalZombie(this, keyH);
     public Collision collision = new Collision(this);
     public WindowPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -62,12 +63,14 @@ public class WindowPanel extends JPanel implements Runnable {
     }
     public void update() {
         cactus.update();
+        normal.update();
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         map.draw(g2);
         cactus.draw(g2);
+        normal.draw(g2);
         g2.dispose();
     }
 }

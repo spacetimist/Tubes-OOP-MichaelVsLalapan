@@ -27,9 +27,8 @@ public abstract class Plant extends Character {
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
-        speed = 4;
+        x = 60;
+        y = 60;
     }
     public void getPlantImage(String imgPath) {
         try {
@@ -39,14 +38,19 @@ public abstract class Plant extends Character {
         }
     }
     public void update() {
-        if(kh.upPressed) {
-            y -= speed;
-        }else if(kh.downPressed) {
-            y += speed;
-        }else if(kh.rightPressed) {
-            x += speed;
-        }else if(kh.leftPressed) {
-            x -= speed;
+        // placing the plant
+        if(kh.upPressed == false) {
+            y -= 60;
+            kh.upPressed = true;
+        }else if(!kh.downPressed) {
+            y += 60;
+            kh.downPressed = true;
+        }else if(!kh.rightPressed) {
+            x += 60;
+            kh.rightPressed = true;
+        }else if(!kh.leftPressed) {
+            x -= 60;
+            kh.leftPressed = true;
         }
 
         collisionOn = false;
