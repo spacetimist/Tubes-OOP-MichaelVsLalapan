@@ -10,15 +10,15 @@ public class Game extends JFrame{
         window.setResizable(false);
         window.setTitle("Michael Vs. Lalapan");
 
-        Map map = new Map();
-        window.add(map);
+        WindowPanel wp = new WindowPanel();
+        window.add(wp);
 
         window.pack();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        map.startGameThread();
+        wp.startGameThread();
     }
 
     public static Game startGame() {

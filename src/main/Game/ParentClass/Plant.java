@@ -1,7 +1,7 @@
 package main.Game.ParentClass;
 
 import main.GUI.KeyHandler;
-import main.GUI.Map;
+import main.GUI.WindowPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,16 +9,21 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Plant extends Character {
+public abstract class Plant extends Character {
     String imgPath;
-    Map map;
+    WindowPanel wp;
     KeyHandler kh;
-    public Plant(Map map, KeyHandler kh, String imgPath) {
-        this.map = map;
+    public final int screenX, screenY;
+    public Plant(WindowPanel wp, KeyHandler kh) {
+        this.wp = wp;
         this.kh = kh;
-        this.imgPath = imgPath;
+
+        screenX = wp.screenWidth/2 - (wp.tileSize/2);
+        screenY = wp.screenHeight/2 - (wp.tileSize/2);
+
+        // make solid area smaller than tilesize (60*60)
+        solidArea = new Rectangle(10, 20, 48, 48);
         setDefaultValues();
-        getPlantImage(imgPath);
     }
 
     public void setDefaultValues() {
@@ -43,9 +48,12 @@ public class Plant extends Character {
         }else if(kh.leftPressed) {
             x -= speed;
         }
+
+        collisionOn = false;
+        wp.collision.checkTile(this);
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = img;
-        g2.drawImage(image, x, y, map.tileSize, map.tileSize, null);
+        g2.drawImage(image, x, y, wp.tileSize, wp.tileSize, null);
     }
 }

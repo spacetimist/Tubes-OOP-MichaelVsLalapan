@@ -1,31 +1,32 @@
 package main.GUI;
+
+import main.Game.Map.Map;
 import main.Game.Plants.Cactus;
-import main.Game.ParentClass.Plant;
+
 import java.awt.*;
-import java.security.Key;
 
 import javax.swing.JPanel;
 
-public class Map extends JPanel implements Runnable {
-    final int originalTileSize = 16;
+public class WindowPanel extends JPanel implements Runnable {
+    final int originalTileSize = 20;
 
     // scaling
-    final int scale = 3; // 16*3 = 48
+    final int scale = 3;
     public final int tileSize = originalTileSize * scale;
-    final int maxScreenCol = 16; // horizontally
-    final int maxScreenRow = 12; // vertically
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
-
-    KeyHandler keyH = new KeyHandler();
+    final int maxScreenCol = 11; // horizontally
+    final int maxScreenRow = 8; // vertically
+    public final int screenWidth = tileSize * maxScreenCol;
+    public final int screenHeight = tileSize * maxScreenRow;
 
     int fps = 60;
-
+    Map map = new Map(this);
+    KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     // initialize plants
-    Cactus cactus = new Cactus(this, keyH, "src\\main\\Resources\\cactus.png");
+    Cactus cactus = new Cactus(this, keyH);
     // Plant plant = new Plant(this, keyH);
-    public Map() {
+    public Collision collision = new Collision(this);
+    public WindowPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -64,8 +65,8 @@ public class Map extends JPanel implements Runnable {
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D)g;
+        map.draw(g2);
         cactus.draw(g2);
         g2.dispose();
     }
