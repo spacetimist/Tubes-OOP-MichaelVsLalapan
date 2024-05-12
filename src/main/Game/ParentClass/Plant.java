@@ -10,16 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Plant extends Character {
-    String imgPath;
     WindowPanel wp;
     KeyHandler kh;
-    public final int screenX, screenY;
+    public boolean collisionUp, collisionDown, collisionLeft, collisionRight = false;
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
         this.kh = kh;
-
-        screenX = wp.screenWidth/2 - (wp.tileSize/2);
-        screenY = wp.screenHeight/2 - (wp.tileSize/2);
 
         // make solid area smaller than tilesize (60*60)
         solidArea = new Rectangle(10, 20, 48, 48);
@@ -27,8 +23,8 @@ public abstract class Plant extends Character {
     }
 
     public void setDefaultValues() {
-        x = 60;
-        y = 60;
+        x = wp.tileSize;
+        y = wp.tileSize;
     }
     public void getPlantImage(String imgPath) {
         try {
@@ -38,25 +34,42 @@ public abstract class Plant extends Character {
         }
     }
     public void update() {
-        // placing the plant
-        if(kh.upPressed == false) {
-            y -= 60;
-            kh.upPressed = true;
-        }else if(!kh.downPressed) {
-            y += 60;
-            kh.downPressed = true;
-        }else if(!kh.rightPressed) {
-            x += 60;
-            kh.rightPressed = true;
-        }else if(!kh.leftPressed) {
-            x -= 60;
-            kh.leftPressed = true;
-        }
+        if(kh.upPressed || kh.downPressed || kh.leftPressed || kh.rightPressed) {
+            if (kh.upPressed) {
+                direction = "up";
+            } else if (kh.downPressed) {
+                direction = "down";
+            } else if (kh.rightPressed) {
+                direction = "right";
+            } else if (kh.leftPressed) {
+                direction = "left";
+            }
+            collision = false;
+            wp.collision.collisionP(this);
 
-        collisionOn = false;
-        wp.collision.checkTile(this);
+            if(!collision) {
+                switch(direction) {
+                    case "up":
+                        y -= wp.tileSize;
+                        kh.upPressed = false;
+                        break;
+                    case "down":
+                        y += wp.tileSize;
+                        kh.downPressed = false;
+                        break;
+                    case "right":
+                        x += wp.tileSize;
+                        kh.rightPressed = false;
+                        break;
+                    case "left":
+                        x -= wp.tileSize;
+                        kh.leftPressed = false;
+                        break;
+                }
+            }
+        }
     }
-    public void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2){
         BufferedImage image = img;
         g2.drawImage(image, x, y, wp.tileSize, wp.tileSize, null);
     }

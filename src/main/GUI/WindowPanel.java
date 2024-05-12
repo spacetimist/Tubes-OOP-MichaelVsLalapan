@@ -19,7 +19,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
 
-    int fps = 60;
+    public int fps = 20;
     Map map = new Map(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
