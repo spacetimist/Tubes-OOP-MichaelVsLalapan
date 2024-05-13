@@ -11,14 +11,12 @@ public class Collision {
     }
     public void collisionZ(Zombie z) {
         int zLeftX = z.x + z.solidArea.x;
-        int zRightX = z.x + z.solidArea.x + z.solidArea.width;
-        int zTopY = z.y + z.solidArea.y;
         int zBottomY = z.y + z.solidArea.y + z.solidArea.height;
 
         int zLeft = zLeftX/wp.tileSize;
         int zBottom = zBottomY/wp.tileSize;
 
-        int tile;
+        int tile = 0;
 
         if(z.direction == "left") {
             zLeft = (int) ((zLeftX - z.speed)/wp.tileSize);
@@ -31,6 +29,9 @@ public class Collision {
                     z.collision = true;
                 }
             }
+        }
+        if (tile == 2) {
+            System.out.println("You Lose");
         }
     }
     public void collisionP(Plant p) {

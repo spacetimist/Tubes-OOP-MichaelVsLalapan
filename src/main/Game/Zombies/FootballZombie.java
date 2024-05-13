@@ -6,6 +6,6 @@ import main.Game.ParentClass.Zombie;
 public class FootballZombie extends Zombie {
     public FootballZombie(WindowPanel wp) {
         super(wp);
-        getZombieImage("src/main/Resources/Zombiesfootball.png");
+        getZombieImage("src/main/Resources/Zombies/football.png");
     }
 }

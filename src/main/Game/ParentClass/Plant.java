@@ -12,7 +12,9 @@ import java.io.IOException;
 public abstract class Plant extends Character {
     WindowPanel wp;
     KeyHandler kh;
-    public boolean collisionUp, collisionDown, collisionLeft, collisionRight = false;
+
+    // attributes
+    int cost, range;
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
         this.kh = kh;

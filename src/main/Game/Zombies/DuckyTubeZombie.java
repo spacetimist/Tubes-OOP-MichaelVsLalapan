@@ -7,5 +7,6 @@ public class DuckyTubeZombie extends Zombie {
     public DuckyTubeZombie(WindowPanel wp) {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/duckytube.png");
+        is_aquatic = true;
     }
 }

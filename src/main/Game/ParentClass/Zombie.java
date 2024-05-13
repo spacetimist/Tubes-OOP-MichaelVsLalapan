@@ -12,22 +12,25 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Zombie extends Character implements SpeedChange {
-    public double speed;
+    public int speed;
     WindowPanel wp;
     public Rectangle solidArea;
+
+    // attributes
+    public boolean is_aquatic = false;
 
     public Zombie(WindowPanel wp) {
         this.wp = wp;
 
         // make solid area smaller than tilesize (60*60)
-        solidArea = new Rectangle(10, 20, 48, 48);
-        setDefaultValues();
+        solidArea = new Rectangle(20, 20, 48, 48);
+        setDefaultValues(1);
     }
 
-    public void setDefaultValues() {
+    public void setDefaultValues(int y) {
         x = 10*wp.tileSize;
-        y = 1*(wp.tileSize)-30; // - 30 biar lebih tinggi
-        speed = 1; // 60px / 5s -> fps 12
+        this.y = y*(wp.tileSize)-30; // - 30 biar lebih tinggi
+        speed = 1;
     }
     public void getZombieImage(String imgPath) {
         try {

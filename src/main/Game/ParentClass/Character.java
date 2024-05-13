@@ -8,4 +8,8 @@ public abstract class Character {
     public BufferedImage img;
     public String direction;
     public boolean collision;
+
+    // attributes
+    public String name;
+    public int health, attack_damage, attack_speed;
 }

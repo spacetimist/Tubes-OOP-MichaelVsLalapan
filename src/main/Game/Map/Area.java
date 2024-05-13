@@ -26,10 +26,10 @@ public class Area {
             tile[0].img = ImageIO.read(new File("src/main/Resources/Tiles/grassTile.png"));
             tile[1].img = ImageIO.read(new File("src/main/Resources/Tiles/poolTile.png"));
             tile[2].img = ImageIO.read(new File("src/main/Resources/Tiles/BaseTile.png"));
-            tile[2].collision = true;
+            tile[2].collision = true; // neither plants or zombies can step on base
             tile[3].img = ImageIO.read(new File("src/main/Resources/Tiles/spawnTile.png"));
-            tile[4].img = ImageIO.read(new File("src/main/Resources/Tiles/morningBottom.png"));
-            tile[4].collision = true;
+            tile[4].img = ImageIO.read(new File("src/main/Resources/Tiles/morningSky.png"));
+            tile[4].collision = true; // neither plants nor zombies can step on the sky
         }catch(IOException e){
             e.printStackTrace();
         }

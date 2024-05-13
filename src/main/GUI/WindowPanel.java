@@ -7,11 +7,14 @@ import main.Game.Inventory;
 import main.Game.ZombieSpawn;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class WindowPanel extends JPanel implements Runnable {
     final int originalTileSize = 20;
+    private long lastSpawnTime = System.currentTimeMillis();
 
     // scaling
     final int scale = 3;
@@ -77,11 +80,14 @@ public class WindowPanel extends JPanel implements Runnable {
         }
     }
     public void update() {
-        for(int i=0; i<ZombieList.length; i++) {
-            if(ZombieList[i] != null) {
-                ZombieList[i].update();
-            }
-        }
+        int i = 0;
+        zSpawn.startSpawnTimer(i);
+        i++;
+//        for(int i=0; i<ZombieList.length; i++) {
+//            if(ZombieList[i] != null) {
+//                ZombieList[i].update();
+//            }
+//        }
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
