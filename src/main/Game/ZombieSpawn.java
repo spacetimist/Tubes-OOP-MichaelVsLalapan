@@ -14,8 +14,8 @@ import javax.swing.*;
 public class ZombieSpawn {
     WindowPanel wp;
     Random random;
-    int[] grassLane = {1, 2, 5, 6};
-    int[] poolLane = {3, 4};
+    int[] lane = {1, 2, 3, 4, 5, 6};
+
     public ZombieSpawn(WindowPanel wp) {
         this.wp = wp;
         random = new Random();
@@ -25,37 +25,42 @@ public class ZombieSpawn {
         // 10 zombie yang dispawn
         int i = 0;
         while (i < 10) {
-                int laneIndex;
+            int laneIndex;
 
-                // perbandingan jalur pool:grass adalah 1:2
-                if (random.nextDouble() <= 0.3) {
-                    laneIndex = selectLaneIndex(); // Memilih jalur secara acak
-                    wp.ZombieList[i] = generateRandomZombie(); // Menghasilkan zombie secara acak
+            laneIndex = selectLaneIndex(); // Memilih jalur secara acak prob 0.3
 
-                    // spawn generated zombie into randomly picked lane
-                    if (wp.ZombieList[i].is_aquatic) {
-                        if(laneIndex < poolLane.length) {
-                            wp.ZombieList[i].setDefaultValues(poolLane[laneIndex]);
-                        } else {
-                            while(wp.ZombieList[i].is_aquatic) {
-                                wp.ZombieList[i] = generateRandomZombie();
-                            }
-                            wp.ZombieList[i].setDefaultValues(grassLane[laneIndex]);
+            // spawn generated zombie into randomly picked lane
+            if(laneIndex != 999) {
+                wp.ZombieList[i] = generateRandomZombie(); // Menghasilkan zombie secara acak
+                if (wp.ZombieList[i].is_aquatic) {
+                    if(laneIndex != 2 && laneIndex != 3) {
+                        while(wp.ZombieList[i].is_aquatic) {
+                            wp.ZombieList[i] = generateRandomZombie();
                         }
-                    } else {
-                        wp.ZombieList[i].setDefaultValues(grassLane[laneIndex]);
                     }
-                    i++;
+                    wp.ZombieList[i].setDefaultValues(lane[laneIndex]);
+                } else {
+                    if(laneIndex == 2 || laneIndex == 3) {
+                        while(!wp.ZombieList[i].is_aquatic) {
+                            wp.ZombieList[i] = generateRandomZombie();
+                        }
+                    }
+                    wp.ZombieList[i].setDefaultValues(lane[laneIndex]);
+                }
             }
+            System.out.println(laneIndex);
+            i++;
         }
     }
 
     private int selectLaneIndex() {
-        if (random.nextInt(3) == 0) { // 1 dari 3 kemungkinan akan memilih jalur air
-            return random.nextInt(poolLane.length);
-        } else {
-            return random.nextInt(grassLane.length);
+        int j;
+        for(j=0; j<6; j++) {
+            if (random.nextInt(3) == 0) { // probability 0.3
+                return j;
+            }
         }
+        return 999;
     }
 
     // generate random zombie
@@ -91,7 +96,11 @@ public class ZombieSpawn {
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                wp.ZombieList[i].update();
+                for(int i=0; i<wp.ZombieList.length; i++) {
+                    if(wp.ZombieList[i] != null) {
+                        wp.ZombieList[i].update();
+                    }
+                }
                 // Memanggil metode set() setiap detik
             }
         });

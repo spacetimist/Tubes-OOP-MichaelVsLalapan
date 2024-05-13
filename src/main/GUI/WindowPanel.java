@@ -41,8 +41,10 @@ public class WindowPanel extends JPanel implements Runnable {
     // instantiate setter
     Inventory inventory = new Inventory(this);
     ZombieSpawn zSpawn = new ZombieSpawn(this);
+    int i;
 
     public WindowPanel() {
+        i = 0;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -80,9 +82,9 @@ public class WindowPanel extends JPanel implements Runnable {
         }
     }
     public void update() {
-        int i = 0;
         zSpawn.startSpawnTimer(i);
         i++;
+
 //        for(int i=0; i<ZombieList.length; i++) {
 //            if(ZombieList[i] != null) {
 //                ZombieList[i].update();
