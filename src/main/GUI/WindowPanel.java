@@ -1,8 +1,10 @@
 package main.GUI;
 
 import main.Game.Map.Map;
-import main.Game.Plants.Cactus;
-import main.Game.Zombies.NormalZombie;
+import main.Game.ParentClass.Plant;
+import main.Game.ParentClass.Zombie;
+import main.Game.Inventory;
+import main.Game.ZombieSpawn;
 
 import java.awt.*;
 
@@ -19,22 +21,35 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
 
-    public int fps = 20;
+    public int fps = 12;
     Map map = new Map(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler kh = new KeyHandler();
     Thread gameThread;
-    // initialize plants
-    Cactus cactus = new Cactus(this, keyH);
-    NormalZombie normal = new NormalZombie(this, keyH);
+
+    // instantiate collision
     public Collision collision = new Collision(this);
+
+    // instantiate plant list, zombie list
+    public Plant PlantList[] = new Plant[10];
+    public Zombie ZombieList[] = new Zombie[10];
+    // deck
+    public Plant Deck[] = new Plant[6];
+
+    // instantiate setter
+    Inventory inventory = new Inventory(this);
+    ZombieSpawn zSpawn = new ZombieSpawn(this);
+
     public WindowPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
-        this.addKeyListener(keyH);
+        this.addKeyListener(kh);
         this.setFocusable(true);
     }
 
+    public void setUp() {
+        zSpawn.set();
+    }
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -62,15 +77,22 @@ public class WindowPanel extends JPanel implements Runnable {
         }
     }
     public void update() {
-        cactus.update();
-        normal.update();
+        for(int i=0; i<ZombieList.length; i++) {
+            if(ZombieList[i] != null) {
+                ZombieList[i].update();
+            }
+        }
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         map.draw(g2);
-        cactus.draw(g2);
-        normal.draw(g2);
+
+        for(int i=0; i<ZombieList.length; i++) {
+            if(ZombieList[i] != null) {
+                ZombieList[i].draw(g2);
+            }
+        }
         g2.dispose();
     }
 }

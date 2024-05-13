@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Zombie;
 
 public class ConeheadZombie extends Zombie {
-    public ConeheadZombie(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public ConeheadZombie(WindowPanel wp) {
+        super(wp);
         getZombieImage("src/main/Resources/Zombies/conehead.png");
     }
 }

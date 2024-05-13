@@ -5,8 +5,8 @@ import main.Game.ParentClass.Zombie;
 
 
 public class BucketheadZombie extends Zombie {
-    public BucketheadZombie(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public BucketheadZombie(WindowPanel wp) {
+        super(wp);
         getZombieImage("src/main/Resources/Zombies/buckethead.png");
     }
 }

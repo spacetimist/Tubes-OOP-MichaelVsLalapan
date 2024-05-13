@@ -60,7 +60,7 @@ public class Collision {
                     if(!p.collision) {
                         p.collision = true;
                     }
-                }
+                } break;
             case "down":
                 pBottom = (pBottomY + wp.tileSize)/wp.tileSize;
                 tile = wp.map.coordinate[pLeft][pBottom];
@@ -68,7 +68,7 @@ public class Collision {
                     if(!p.collision) {
                         p.collision = true;
                     }
-                }
+                } break;
             case "left":
                 pLeft = (pLeftX - wp.tileSize)/wp.tileSize;
                 tile = wp.map.coordinate[pLeft][pBottom];
@@ -76,7 +76,7 @@ public class Collision {
                     if(!p.collision) {
                         p.collision = true;
                     }
-                }
+                } break;
             case "right":
                 pRight = (pRightX + wp.tileSize)/wp.tileSize;
                 tile = wp.map.coordinate[pRight][pBottom];
@@ -84,7 +84,7 @@ public class Collision {
                     if(!p.collision) {
                         p.collision = true;
                     }
-                }
+                } break;
         }
 
 

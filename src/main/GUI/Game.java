@@ -18,6 +18,8 @@ public class Game extends JFrame{
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+        wp.setUp();
+
         wp.startGameThread();
     }
 

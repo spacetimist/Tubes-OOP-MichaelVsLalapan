@@ -17,8 +17,6 @@ public abstract class Plant extends Character {
         this.wp = wp;
         this.kh = kh;
 
-        // make solid area smaller than tilesize (60*60)
-        solidArea = new Rectangle(10, 20, 48, 48);
         setDefaultValues();
     }
 
