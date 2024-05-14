@@ -14,7 +14,7 @@ public abstract class Plant extends Character {
     KeyHandler kh;
 
     // attributes
-    int cost, range;
+    public int cost, range, cooldown;
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
         this.kh = kh;

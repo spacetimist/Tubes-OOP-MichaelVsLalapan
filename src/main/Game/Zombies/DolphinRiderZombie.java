@@ -9,5 +9,8 @@ public class DolphinRiderZombie extends Zombie {
         getZombieImage("src/main/Resources/Zombies/dolphinrider.png");
         is_aquatic = true;
         name = "Dolphin Rider Zombie";
+        health = 175;
+        attack_damage = 100;
+        attack_speed = 1;
     }
 }

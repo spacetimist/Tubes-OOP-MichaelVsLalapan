@@ -8,5 +8,9 @@ public class DuckyTubeZombie extends Zombie {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/duckytube.png");
         is_aquatic = true;
+        name = "Ducky Tube Zombie";
+        health = 100;
+        attack_damage = 100;
+        attack_speed = 1;
     }
 }

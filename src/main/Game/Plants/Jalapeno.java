@@ -6,5 +6,13 @@ import main.Game.ParentClass.Plant;
 public class Jalapeno extends Plant {
     public Jalapeno(WindowPanel wp, KeyHandler kh) {
         super(wp, kh);
+
+        name = "Jalapeno";
+        cost = 125;
+        health = 250;
+        attack_damage = 5000;
+        attack_speed = 0;
+        range = -1;
+        cooldown = 35;
     }
 }

@@ -8,5 +8,9 @@ public class BucketheadZombie extends Zombie {
     public BucketheadZombie(WindowPanel wp) {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/buckethead.png");
+        name = "Buckethead Zombie";
+        health = 300;
+        attack_damage = 100;
+        attack_speed = 1;
     }
 }

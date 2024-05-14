@@ -7,5 +7,9 @@ public class ConeheadZombie extends Zombie {
     public ConeheadZombie(WindowPanel wp) {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/conehead.png");
+        name = "Conehead Zombie";
+        health = 250;
+        attack_damage = 100;
+        attack_speed = 1;
     }
 }

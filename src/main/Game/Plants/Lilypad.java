@@ -6,5 +6,13 @@ import main.Game.ParentClass.Plant;
 public class Lilypad extends Plant {
     public Lilypad(WindowPanel wp, KeyHandler kh) {
         super(wp, kh);
+
+        name = "Lilypad";
+        cost = 25;
+        health = 100;
+        attack_damage = 0;
+        attack_speed = 0;
+        range = 0;
+        cooldown = 10;
     }
 }
