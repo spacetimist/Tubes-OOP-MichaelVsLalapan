@@ -37,9 +37,12 @@ public class WindowPanel extends JPanel implements Runnable {
     public Zombie ZombieList[] = new Zombie[10];
     // deck
     public Plant Deck[] = new Plant[6];
+    // batch
+    public Zombie Batch[] = new Zombie[6];
 
     // instantiate setter
     Inventory inventory = new Inventory(this);
+
     ZombieSpawn zSpawn = new ZombieSpawn(this);
     int i;
 
@@ -82,23 +85,21 @@ public class WindowPanel extends JPanel implements Runnable {
         }
     }
     public void update() {
-        zSpawn.startSpawnTimer(i);
-        i++;
-
-//        for(int i=0; i<ZombieList.length; i++) {
-//            if(ZombieList[i] != null) {
-//                ZombieList[i].update();
-//            }
+        zSpawn.run();
+//        if(zSpawn.n < 10) {
+//            zSpawn.run();
+//
 //        }
+
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         map.draw(g2);
 
-        for(int i=0; i<ZombieList.length; i++) {
-            if(ZombieList[i] != null) {
-                ZombieList[i].draw(g2);
+        for(int i=0; i<Batch.length; i++) {
+            if(Batch[i] != null) {
+                Batch[i].draw(g2);
             }
         }
         g2.dispose();
