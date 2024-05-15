@@ -6,7 +6,7 @@ import main.Game.ParentClass.Plant;
 public class SnowPea extends Plant {
     public SnowPea(WindowPanel wp, KeyHandler kh) {
         super(wp, kh);
-
+        getPlantImage("src/main/Resources/Plants/snowpea.png");
         name = "Snow pea";
         cost = 175;
         health = 100;

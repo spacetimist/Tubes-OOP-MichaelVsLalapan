@@ -4,6 +4,8 @@ import main.Game.Map.Map;
 import main.Game.ParentClass.Plant;
 import main.Game.ParentClass.Zombie;
 import main.Game.Inventory;
+import main.Game.Plants.Cactus;
+import main.Game.Plants.Jalapeno;
 import main.Game.ZombieSpawn;
 
 import java.awt.*;
@@ -44,6 +46,7 @@ public class WindowPanel extends JPanel implements Runnable {
     Inventory inventory = new Inventory(this);
 
     ZombieSpawn zSpawn = new ZombieSpawn(this);
+
     int i;
 
     public WindowPanel() {
@@ -90,12 +93,14 @@ public class WindowPanel extends JPanel implements Runnable {
 //            zSpawn.run();
 //
 //        }
+        jalapeno.update();
 
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         map.draw(g2);
+        jalapeno.draw(g2);
 
         for(int i=0; i<Batch.length; i++) {
             if(Batch[i] != null) {

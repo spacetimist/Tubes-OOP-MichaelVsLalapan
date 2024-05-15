@@ -6,7 +6,7 @@ import main.Game.ParentClass.Plant;
 public class Repeater extends Plant {
     public Repeater(WindowPanel wp, KeyHandler kh) {
         super(wp, kh);
-
+        getPlantImage("src/main/Resources/Plants/repeater.png");
         name = "Repeater";
         cost = 200;
         health = 300;

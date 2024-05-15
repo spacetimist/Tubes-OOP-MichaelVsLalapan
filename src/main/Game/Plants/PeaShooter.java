@@ -6,7 +6,7 @@ import main.Game.ParentClass.Plant;
 public class PeaShooter extends Plant {
     public PeaShooter(WindowPanel wp, KeyHandler kh) {
         super(wp, kh);
-
+        getPlantImage("src/main/Resources/Plants/peashooter.png");
         name = "Peashooter";
         cost = 100;
         health = 100;
