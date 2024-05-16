@@ -12,7 +12,6 @@ import java.io.IOException;
 public abstract class Plant extends Character {
     WindowPanel wp;
     KeyHandler kh;
-
     // attributes
     public int cost, range, cooldown;
     public Plant(WindowPanel wp, KeyHandler kh) {
@@ -21,6 +20,8 @@ public abstract class Plant extends Character {
 
         setDefaultValues();
     }
+    public int height = 60;
+    public int width = 60;
 
     public void setDefaultValues() {
         x = wp.tileSize;
@@ -71,6 +72,6 @@ public abstract class Plant extends Character {
     }
     public void draw(Graphics2D g2){
         BufferedImage image = img;
-        g2.drawImage(image, x, y, wp.tileSize, wp.tileSize, null);
+        g2.drawImage(image, x, y, width, height, null);
     }
 }

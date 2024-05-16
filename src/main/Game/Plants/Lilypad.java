@@ -6,7 +6,7 @@ import main.Game.ParentClass.Plant;
 public class Lilypad extends Plant {
     public Lilypad(WindowPanel wp, KeyHandler kh) {
         super(wp, kh);
-
+        getPlantImage("src/main/Resources/Plants/lilypad.png");
         name = "Lilypad";
         cost = 25;
         health = 100;

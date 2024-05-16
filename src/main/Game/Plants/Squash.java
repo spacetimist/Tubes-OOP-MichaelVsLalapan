@@ -6,7 +6,7 @@ import main.Game.ParentClass.Plant;
 public class Squash extends Plant {
     public Squash(WindowPanel wp, KeyHandler kh) {
         super(wp, kh);
-
+        getPlantImage("src/main/Resources/Plants/squash.png");
         name = "Squash";
         cost = 50;
         health = 100;

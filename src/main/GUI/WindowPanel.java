@@ -4,6 +4,7 @@ import main.Game.Map.Map;
 import main.Game.ParentClass.Plant;
 import main.Game.ParentClass.Zombie;
 import main.Game.Inventory;
+import main.Game.Plants.*;
 import main.Game.ZombieSpawn;
 
 import java.awt.*;
@@ -44,6 +45,15 @@ public class WindowPanel extends JPanel implements Runnable {
     Inventory inventory = new Inventory(this);
 
     ZombieSpawn zSpawn = new ZombieSpawn(this);
+    Tallnut peas = new Tallnut(this, kh);
+    Wallnut w = new Wallnut(this, kh);
+
+
+    // game state
+    public int gameState;
+    public final int playState = 1;
+    public final int preGameState = 2;
+
     int i;
 
     public WindowPanel() {
@@ -56,6 +66,7 @@ public class WindowPanel extends JPanel implements Runnable {
     }
 
     public void setUp() {
+        gameState = preGameState;
         zSpawn.set();
     }
     public void startGameThread() {
@@ -90,12 +101,15 @@ public class WindowPanel extends JPanel implements Runnable {
 //            zSpawn.run();
 //
 //        }
-
+        w.update();
+        peas.update();
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         map.draw(g2);
+        peas.draw(g2);
+        w.draw(g2);
 
         for(int i=0; i<Batch.length; i++) {
             if(Batch[i] != null) {

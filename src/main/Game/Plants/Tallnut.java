@@ -6,6 +6,10 @@ import main.Game.ParentClass.Plant;
 public class Tallnut extends Plant {
     public Tallnut(WindowPanel wp, KeyHandler kh) {
         super(wp, kh);
+        getPlantImage("src/main/Resources/Plants/tallnut.png");
+        // biar lebih tinggi
+
+
 
         name = "Tall nut";
         cost = 125;
