@@ -27,7 +27,7 @@ public class WindowPanel extends JPanel implements Runnable {
 
     public int fps = 12;
     Map map = new Map(this);
-    KeyHandler kh = new KeyHandler();
+    KeyHandler kh = new KeyHandler(this);
     Thread gameThread;
 
     // instantiate collision
@@ -52,7 +52,7 @@ public class WindowPanel extends JPanel implements Runnable {
     // game state
     public int gameState;
     public final int playState = 1;
-    public final int preGameState = 2;
+    public final int inventoryState = 2;
 
     int i;
 
@@ -66,8 +66,9 @@ public class WindowPanel extends JPanel implements Runnable {
     }
 
     public void setUp() {
-        gameState = preGameState;
+        gameState = inventoryState; // initial state
         zSpawn.set();
+        inventory.set();
     }
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -96,25 +97,35 @@ public class WindowPanel extends JPanel implements Runnable {
         }
     }
     public void update() {
-        zSpawn.run();
-//        if(zSpawn.n < 10) {
-//            zSpawn.run();
-//
-//        }
-        w.update();
-        peas.update();
+        if(gameState == inventoryState) {
+
+        }
+        if(gameState == playState) {
+            zSpawn.run();
+        }
+            w.update();
+            peas.update();
     }
+    State state = new State(this);
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        map.draw(g2);
-        peas.draw(g2);
-        w.draw(g2);
+        if(gameState == inventoryState) {
+            state.draw(g2);
+            state.drawDeck(g2);
+        }
+        if(gameState == playState) {
+            state.drawDeck(g2);
+            map.draw(g2);
+            w.draw(g2);
+            peas.draw(g2);
 
-        for(int i=0; i<Batch.length; i++) {
-            if(Batch[i] != null) {
-                Batch[i].draw(g2);
+            for(int i=0; i<Batch.length; i++) {
+                if(Batch[i] != null) {
+                    Batch[i].draw(g2);
+                }
             }
+
         }
         g2.dispose();
     }
