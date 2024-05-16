@@ -123,7 +123,7 @@ public class ZombieSpawn extends Thread {
         return null;
     }
 
-//    public void startSpawnTimer() {
+    //    public void startSpawnTimer() {
 //        // Membuat objek Timer dengan interval 1000 milidetik (1 detik)
 //        Timer timer = new Timer(1000, new ActionListener() {
 //            @Override
