@@ -14,14 +14,13 @@ public abstract class Plant extends Character {
     KeyHandler kh;
     // attributes
     public int cost, range, cooldown;
+    public boolean is_decked = false;
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
         this.kh = kh;
 
         setDefaultValues();
     }
-    public int height = 60;
-    public int width = 60;
 
     public void setDefaultValues() {
         x = wp.tileSize;

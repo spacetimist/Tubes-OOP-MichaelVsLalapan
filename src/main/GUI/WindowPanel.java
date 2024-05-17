@@ -1,9 +1,10 @@
 package main.GUI;
 
+import main.Game.Inventory;
 import main.Game.Map.Map;
 import main.Game.ParentClass.Plant;
 import main.Game.ParentClass.Zombie;
-import main.Game.Inventory;
+import main.Game.Planting;
 import main.Game.Plants.*;
 import main.Game.ZombieSpawn;
 
@@ -15,7 +16,6 @@ import javax.swing.*;
 
 public class WindowPanel extends JPanel implements Runnable {
     final int originalTileSize = 20;
-    private long lastSpawnTime = System.currentTimeMillis();
 
     // scaling
     final int scale = 3;
@@ -34,25 +34,26 @@ public class WindowPanel extends JPanel implements Runnable {
     public Collision collision = new Collision(this);
 
     // instantiate plant list, zombie list
-    public Plant PlantList[] = new Plant[10];
+    public Plant PlantList[] = new Plant[72]; // jumlah semua tile yg bisa ditanamin plus 18 lilypad
     public Zombie ZombieList[] = new Zombie[10];
-    // deck
+    // deck and inventory
     public Plant Deck[] = new Plant[6];
+    public Plant Inventory[] = new Plant[10];
     // batch
     public Zombie Batch[] = new Zombie[6];
 
     // instantiate setter
-    Inventory inventory = new Inventory(this);
+    Planting planting = new Planting(this);
 
     ZombieSpawn zSpawn = new ZombieSpawn(this);
-    Tallnut peas = new Tallnut(this, kh);
-    Wallnut w = new Wallnut(this, kh);
-
+    Inventory inv = new Inventory(this);
 
     // game state
     public int gameState;
     public final int playState = 1;
     public final int inventoryState = 2;
+    public final int pickingDeck = 3;
+    public final int pickingMap = 4;
 
     int i;
 
@@ -68,7 +69,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public void setUp() {
         gameState = inventoryState; // initial state
         zSpawn.set();
-        inventory.set();
+        inv.set();
     }
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -103,10 +104,8 @@ public class WindowPanel extends JPanel implements Runnable {
         if(gameState == playState) {
             zSpawn.run();
         }
-            w.update();
-            peas.update();
     }
-    State state = new State(this);
+    public State state = new State(this);
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
@@ -117,8 +116,6 @@ public class WindowPanel extends JPanel implements Runnable {
         if(gameState == playState) {
             state.drawDeck(g2);
             map.draw(g2);
-            w.draw(g2);
-            peas.draw(g2);
 
             for(int i=0; i<Batch.length; i++) {
                 if(Batch[i] != null) {

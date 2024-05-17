@@ -21,6 +21,29 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_S) {
                 wp.gameState = wp.playState;
             }
+            if(code == KeyEvent.VK_UP) {
+                if(wp.state.Row != 0) {
+                    wp.state.Row--;
+                }
+            }
+            if(code == KeyEvent.VK_LEFT) {
+                if(wp.state.Col != 0) {
+                    wp.state.Col--;
+                }
+            }
+            if(code == KeyEvent.VK_DOWN) {
+                if(wp.state.Row != 1) {
+                    wp.state.Row++;
+                }
+            }
+            if(code == KeyEvent.VK_RIGHT) {
+                if(wp.state.Col != 4) {
+                    wp.state.Col++;
+                }
+            }
+            if(code == KeyEvent.VK_ENTER) {
+                wp.inv.deck();
+            }
         }
         if(wp.gameState == wp.playState) {
             if(code == KeyEvent.VK_UP && !upPressed) {
@@ -35,6 +58,9 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_RIGHT && !rightPressed) {
                 rightPressed = true;
             }
+
+        }
+        if(wp.gameState == wp.inventoryState) {
 
         }
     }
