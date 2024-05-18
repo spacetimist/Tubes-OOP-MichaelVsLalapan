@@ -44,6 +44,9 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_ENTER) {
                 wp.inv.deck();
             }
+            if(code == KeyEvent.VK_D) {
+                wp.gameState = wp.deckState;
+            }
         }
         if(wp.gameState == wp.playState) {
             if(code == KeyEvent.VK_UP && !upPressed) {
@@ -60,8 +63,26 @@ public class KeyHandler implements KeyListener {
             }
 
         }
-        if(wp.gameState == wp.inventoryState) {
-
+        if(wp.gameState == wp.deckState) {
+            if(code == KeyEvent.VK_S) {
+                wp.gameState = wp.playState;
+            }
+            if(code == KeyEvent.VK_LEFT) {
+                if(wp.state.Col != 0) {
+                    wp.state.Col--;
+                }
+            }
+            if(code == KeyEvent.VK_RIGHT) {
+                if(wp.state.Col != 5) {
+                    wp.state.Col++;
+                }
+            }
+            if(code == KeyEvent.VK_ENTER) {
+                wp.inv.removeFromDeck();
+            }
+            if(code == KeyEvent.VK_I) {
+                wp.gameState = wp.inventoryState;
+            }
         }
     }
 

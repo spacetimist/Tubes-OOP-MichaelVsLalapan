@@ -1,6 +1,7 @@
 package main.GUI;
 
 import main.Game.Map.Map;
+import main.Game.ParentClass.Plant;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -13,6 +14,8 @@ public class State {
     public int Row = 0 ;
     public int inventoryX;
     public int inventoryY;
+    public int deckX;
+    public int deckY;
     Font arial;
     public boolean messageOn = false;
     Graphics2D g2;
@@ -39,10 +42,25 @@ public class State {
         g2.setColor(Color.WHITE);
 
         if(wp.gameState == wp.playState) {
-
+            drawDeck();
+            deckX = 2*wp.tileSize;
+            deckY = 7*wp.tileSize;
+            drawCursor(deckX, deckY);
         }
         if(wp.gameState == wp.inventoryState) {
             drawInventory();
+            drawDeck();
+            inventoryX = 3*wp.tileSize;
+            inventoryY = 2*wp.tileSize;
+
+            drawCursor(inventoryX, inventoryY);
+        }
+        if(wp.gameState == wp.deckState) {
+            drawInventory();
+            drawDeck();
+            deckX = 2*wp.tileSize;
+            deckY = 7*wp.tileSize;
+            drawCursor(deckX, deckY);
         }
     }
 
@@ -58,10 +76,10 @@ public class State {
         inventoryX = 3*wp.tileSize;
         inventoryY = 2*wp.tileSize;
 
-        for(int i=0; i<10; i++) {
-            g2.drawImage(wp.Inventory[i].img, inventoryX, inventoryY, wp.tileSize, wp.tileSize, null);
-            wp.Inventory[i].x = inventoryX;
-            wp.Inventory[i].y = inventoryY;
+        for (Plant plant : wp.Inventory) {
+            g2.drawImage(plant.img, inventoryX, inventoryY, wp.tileSize, wp.tileSize, null);
+            plant.x = inventoryX;
+            plant.y = inventoryY;
 
             if(inventoryX == 7*wp.tileSize) {
                 inventoryY += wp.tileSize;
@@ -74,38 +92,33 @@ public class State {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
         g2.drawString(text2, x1, y1);
 
-        inventoryX = 3*wp.tileSize;
-        inventoryY = 2*wp.tileSize;
-
-        drawCursor(inventoryX, inventoryY);
-
     }
 
-    public void drawDeck(Graphics2D g2) {
-        this.g2 = g2;
+    public void drawDeck() {
         for(int j=1; j<=9; j++){
             wp.map.coordinate[j][7] = 5;
         }
         int col = 0;
-        int x = 2*wp.tileSize;
-        int y = 7*wp.tileSize;
+        deckX = 2*wp.tileSize;
+        deckY = 7*wp.tileSize;
 
         while(col < 7) {
 //            g2.drawImage(wp.map.area.tile[5].img, x, y, wp.tileSize, wp.tileSize, null);
-            wp.map.area.draw(g2, x, y, 5);
+            wp.map.area.draw(g2, deckX, deckY, 5);
             col++;
-            x += wp.tileSize;
+            deckX += wp.tileSize;
 
         }
         drawDeckContent();
     }
 
     public void drawDeckContent() {
-        for(int i=0; i<6; i++) {
-            if(wp.Deck[i] != null) {
-                g2.drawImage(wp.Deck[i].img, (i+2)*wp.tileSize, 7*wp.tileSize, null);
-//                System.out.println(wp.Deck[i].name);
-            }
+        int i = 0;
+        for (Plant plant : wp.Deck) {
+            g2.drawImage(plant.img, (i+2)*wp.tileSize, 7*wp.tileSize, null);
+            plant.x = (i+2)*wp.tileSize;
+            plant.y = 7*wp.tileSize;
+            i++;
         }
     }
     public void drawCursor(int startX, int startY) {

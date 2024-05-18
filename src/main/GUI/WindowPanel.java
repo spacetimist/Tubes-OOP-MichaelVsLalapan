@@ -11,6 +11,7 @@ import main.Game.ZombieSpawn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -37,8 +38,8 @@ public class WindowPanel extends JPanel implements Runnable {
     public Plant PlantList[] = new Plant[72]; // jumlah semua tile yg bisa ditanamin plus 18 lilypad
     public Zombie ZombieList[] = new Zombie[10];
     // deck and inventory
-    public Plant Deck[] = new Plant[6];
-    public Plant Inventory[] = new Plant[10];
+    public ArrayList<Plant> Deck = new ArrayList<>(6);
+    public ArrayList<Plant> Inventory = new ArrayList<>(10);
     // batch
     public Zombie Batch[] = new Zombie[6];
 
@@ -52,7 +53,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public int gameState;
     public final int playState = 1;
     public final int inventoryState = 2;
-    public final int pickingDeck = 3;
+    public final int deckState = 3;
     public final int pickingMap = 4;
 
     int i;
@@ -111,10 +112,11 @@ public class WindowPanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D)g;
         if(gameState == inventoryState) {
             state.draw(g2);
-            state.drawDeck(g2);
+        }
+        if(gameState == deckState) {
+            state.draw(g2);
         }
         if(gameState == playState) {
-            state.drawDeck(g2);
             map.draw(g2);
 
             for(int i=0; i<Batch.length; i++) {
@@ -122,6 +124,7 @@ public class WindowPanel extends JPanel implements Runnable {
                     Batch[i].draw(g2);
                 }
             }
+            state.draw(g2);
 
         }
         g2.dispose();
