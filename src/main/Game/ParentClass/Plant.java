@@ -18,7 +18,7 @@ public abstract class Plant extends Character {
         this.wp = wp;
         this.kh = kh;
 
-        setDefaultValues(x, y);
+//        setDefaultValues(x, y);
     }
 
     public void setDefaultValues(int x, int y) {

@@ -25,4 +25,7 @@ public class Planting {
             }
         }
     }
+//    public void plantHere(Plant plant) {
+//        plant = new
+//    }
 }

@@ -103,7 +103,7 @@ public class WindowPanel extends JPanel implements Runnable {
         if(gameState == inventoryState) {
 
         }
-        if(gameState == playState) {
+        if(gameState == playState || gameState == plantingState) {
             zSpawn.run();
         }
     }
@@ -126,6 +126,7 @@ public class WindowPanel extends JPanel implements Runnable {
                 }
             }
             state.draw(g2);
+            state.drawPlant(g2);
 
         }
         g2.dispose();
