@@ -13,4 +13,10 @@ public class NewspaperZombie extends Zombie {
         attack_damage = 200;
         attack_speed = 1;
     }
+
+    public void loseNewspaper(){
+        hasNewspaper = false;
+        speedIncrease();
+        getZombieImage("src/main/Resources/Zombies/nonewspaper.png");
+    }
 }
