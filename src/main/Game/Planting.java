@@ -14,9 +14,15 @@ public class Planting {
 
     public int planted = 0;
 
-    public void set() {
-        while(planted < 72) {
-
+    public void selectTile() {
+        int sun = 100;
+        for(Plant plant : wp.Deck) {
+            if(plant.x == wp.state.cursorX && plant.y == wp.state.cursorY) {
+//                System.out.print(wp.Deck.size());
+                wp.PlantList.add(plant);
+                System.out.println("pass selectTile");
+                break;
+            }
         }
     }
 }

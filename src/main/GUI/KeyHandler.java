@@ -49,17 +49,42 @@ public class KeyHandler implements KeyListener {
             }
         }
         if(wp.gameState == wp.playState) {
-            if(code == KeyEvent.VK_UP && !upPressed) {
-                upPressed = true;
+            if(code == KeyEvent.VK_LEFT) {
+                if(wp.state.Col != 0) {
+                    wp.state.Col--;
+                }
             }
-            if(code == KeyEvent.VK_LEFT && !leftPressed) {
-                leftPressed = true;
+            if(code == KeyEvent.VK_RIGHT) {
+                if(wp.state.Col != 6) {
+                    wp.state.Col++;
+                }
             }
-            if(code == KeyEvent.VK_DOWN && !downPressed) {
-                downPressed = true;
+            if(code == KeyEvent.VK_W) {
+                if(wp.state.plantRow != 0) {
+                    wp.state.plantRow--;
+                }
             }
-            if(code == KeyEvent.VK_RIGHT && !rightPressed) {
-                rightPressed = true;
+            if(code == KeyEvent.VK_A) {
+                if(wp.state.plantCol != 0) {
+                    wp.state.plantCol--;
+                }
+            }
+            if(code == KeyEvent.VK_S) {
+                if(wp.state.plantRow != 5) {
+                    wp.state.plantRow++;
+                }
+            }
+            if(code == KeyEvent.VK_D) {
+                if(wp.state.plantCol != 8) {
+                    wp.state.plantCol++;
+                }
+            }
+            if(code == KeyEvent.VK_ENTER) {
+                wp.gameState = wp.plantingState;
+                wp.planting.selectTile();
+            }
+            if(code == KeyEvent.VK_SPACE) {
+
             }
 
         }
@@ -82,6 +107,31 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_I) {
                 wp.gameState = wp.inventoryState;
+            }
+        }
+        if(wp.gameState == wp.plantingState) {
+            if(code == KeyEvent.VK_W) {
+                if(wp.state.plantRow != 0) {
+                    wp.state.plantRow--;
+                }
+            }
+            if(code == KeyEvent.VK_A) {
+                if(wp.state.plantCol != 0) {
+                    wp.state.plantCol--;
+                }
+            }
+            if(code == KeyEvent.VK_S) {
+                if(wp.state.plantRow != 5) {
+                    wp.state.plantRow++;
+                }
+            }
+            if(code == KeyEvent.VK_D) {
+                if(wp.state.plantCol != 8) {
+                    wp.state.plantCol++;
+                }
+            }
+            if(code == KeyEvent.VK_ENTER) {
+                wp.gameState = wp.playState;
             }
         }
     }

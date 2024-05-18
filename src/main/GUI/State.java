@@ -10,10 +10,14 @@ public class State {
     WindowPanel wp;
     public int cursorY;
     public int cursorX;
+    public int plantX;
+    public int plantY;
     public int Col = 0;
     public int Row = 0 ;
     public int inventoryX;
     public int inventoryY;
+    public int plantMapX;
+    public int plantMapY;
     public int deckX;
     public int deckY;
     Font arial;
@@ -45,7 +49,13 @@ public class State {
             drawDeck();
             deckX = 2*wp.tileSize;
             deckY = 7*wp.tileSize;
+            plantX = wp.tileSize;
+            plantY = wp.tileSize;
+            drawPlant();
             drawCursor(deckX, deckY);
+        }
+        if(wp.gameState == wp.plantingState) {
+//            wp.planting.selectTile();
         }
         if(wp.gameState == wp.inventoryState) {
             drawInventory();
@@ -102,13 +112,14 @@ public class State {
         deckX = 2*wp.tileSize;
         deckY = 7*wp.tileSize;
 
-        while(col < 7) {
+        while(col < 6) {
 //            g2.drawImage(wp.map.area.tile[5].img, x, y, wp.tileSize, wp.tileSize, null);
             wp.map.area.draw(g2, deckX, deckY, 5);
             col++;
             deckX += wp.tileSize;
 
         }
+        wp.map.area.draw(g2, deckX, deckY, 6); // draw shovel
         drawDeckContent();
     }
 
@@ -127,10 +138,53 @@ public class State {
 
         g2.setColor(Color.WHITE);
         g2.setStroke(new BasicStroke(3));
-        g2.drawRoundRect(cursorX, cursorY, wp.tileSize, wp.tileSize, 10, 10);
+//        if(!wp.map.hasPlant[cursorX][cursorY]) {
+//
+//        }
+            g2.drawRoundRect(cursorX, cursorY, wp.tileSize, wp.tileSize, 10, 10);
+
     }
 
-    public void update() {
+//    public void drawCursor2(int startX, int startY) {
+//        cursorX = startX + (wp.tileSize * plantCol);
+//        cursorY = startY + (wp.tileSize * plantRow);
+//
+//        g2.setColor(Color.WHITE);
+//        g2.setStroke(new BasicStroke(3));
+////        if(!wp.map.hasPlant[cursorX][cursorY]) {
+////
+////        }
+//        g2.drawRoundRect(cursorX, cursorY, wp.tileSize, wp.tileSize, 10, 10);
+//
+//    }
+
+    public int plantCol = 0;
+    public int plantRow = -1 ;
+
+    public void drawPlant() {
+
+//        wp.map.hasPlant[x][y] = true;
+        plantMapX = 1;
+        plantMapY = 1;
+
+//        while(plantMapY <= 6 && wp.map.hasPlant[plantMapX][plantMapY]) {
+//            while(plantMapX <= 9 && wp.map.hasPlant[plantMapX][plantMapY]) {
+//                plantMapX++;
+//                break;
+//            }
+//            plantMapY++;
+//            break;
+//        }
+
+        plantX = plantMapX*wp.tileSize + (wp.tileSize * plantCol);
+        plantY = plantMapY*wp.tileSize + (wp.tileSize * plantRow);
+        System.out.println(plantCol);
+        System.out.println(plantRow);
+        if(wp.PlantList.size() != 0) {
+            Plant plant = wp.PlantList.get(wp.PlantList.size() - 1);
+            g2.drawImage(plant.img, plantX, plantY, null);
+
+        }
 
     }
     public int centerX(String text) {

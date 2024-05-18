@@ -14,17 +14,16 @@ public abstract class Plant extends Character {
     KeyHandler kh;
     // attributes
     public int cost, range, cooldown;
-    public boolean is_decked = false;
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
         this.kh = kh;
 
-        setDefaultValues();
+        setDefaultValues(x, y);
     }
 
-    public void setDefaultValues() {
-        x = wp.tileSize;
-        y = wp.tileSize;
+    public void setDefaultValues(int x, int y) {
+        this.x = x*wp.tileSize;
+        this.y = y*wp.tileSize;
     }
     public void getPlantImage(String imgPath) {
         try {

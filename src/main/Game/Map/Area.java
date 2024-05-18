@@ -24,6 +24,7 @@ public class Area {
             tile[3] = new Tile();
             tile[4] = new Tile();
             tile[5] = new Tile();
+            tile[6] = new Tile();
             tile[0].img = ImageIO.read(new File("src/main/Resources/Tiles/grassTile.png"));
             tile[1].img = ImageIO.read(new File("src/main/Resources/Tiles/poolTile.png"));
             tile[2].img = ImageIO.read(new File("src/main/Resources/Tiles/BaseTile.png"));
@@ -33,6 +34,7 @@ public class Area {
             tile[4].collision = true; // neither plants nor zombies can step on the sky
             tile[5].img = ImageIO.read(new File("src/main/Resources/Tiles/deck.png"));
             tile[5].collision = true; // neither plants nor zombies can step on deck
+            tile[6].img = ImageIO.read(new File("src/main/Resources/Tiles/shovel.png"));
         }catch(IOException e){
             e.printStackTrace();
         }

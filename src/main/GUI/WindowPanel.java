@@ -11,6 +11,7 @@ import main.Game.ZombieSpawn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -27,7 +28,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow;
 
     public int fps = 12;
-    Map map = new Map(this);
+    public Map map = new Map(this);
     KeyHandler kh = new KeyHandler(this);
     Thread gameThread;
 
@@ -35,7 +36,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public Collision collision = new Collision(this);
 
     // instantiate plant list, zombie list
-    public Plant PlantList[] = new Plant[72]; // jumlah semua tile yg bisa ditanamin plus 18 lilypad
+    public ArrayList<Plant> PlantList = new ArrayList<>();
     public Zombie ZombieList[] = new Zombie[10];
     // deck and inventory
     public ArrayList<Plant> Deck = new ArrayList<>(6);
@@ -54,7 +55,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int inventoryState = 2;
     public final int deckState = 3;
-    public final int pickingMap = 4;
+    public final int plantingState = 4;
 
     int i;
 
@@ -116,7 +117,7 @@ public class WindowPanel extends JPanel implements Runnable {
         if(gameState == deckState) {
             state.draw(g2);
         }
-        if(gameState == playState) {
+        if(gameState == playState || gameState == plantingState) {
             map.draw(g2);
 
             for(int i=0; i<Batch.length; i++) {
