@@ -1,5 +1,5 @@
 
-# <p align="center"> Tubes-OOP-PlantsVsZombies
+# <p align="center"> Michael Vs Lalapan
 <p align="center">
 Tugas Besar IF2212 Pemrograman Berorientasi Objek STI 2024
 
