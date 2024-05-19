@@ -99,7 +99,6 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_ENTER) {
                 wp.openInputDialog();
                 wp.planting.selectTile();
-                wp.gameState = wp.plantingState;
             }
 
         }

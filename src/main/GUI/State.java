@@ -162,16 +162,8 @@ public class State {
     public void drawPlant(Graphics2D g2) {
         this.g2 = g2;
         for(Plant plant : wp.PlantList) {
-//            plant.x3 = plant.x2;
-//            plant.y3 = plant.y2;
-//            plant.x = wp.xValue;
-//            plant.y = wp.yValue;
 
-//            plant.x = fixedPlantX;
-//            plant.y = fixedPlantY;
-//            plant.draw(g2);
             plant.draw(g2);
-//            g2.drawImage(plant.img, wp.xValue*60, wp.yValue*60, null);
 
             wp.map.hasPlant[wp.xValue][wp.yValue] = true;
         }

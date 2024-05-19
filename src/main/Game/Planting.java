@@ -54,9 +54,7 @@ public class Planting {
                 }
 
                 wp.PlantList.add(newPlant);
-                System.out.println(wp.PlantList.size());
-                newPlant.x = wp.xValue;
-                newPlant.y = wp.yValue;
+                newPlant.setDefaultValues(wp.xValue, wp.yValue);
                 System.out.println("pass selectTile");
                 break;
             }

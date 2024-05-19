@@ -21,15 +21,15 @@ public abstract class Plant extends Character {
         this.kh = kh;
         collision = true;
 
-        solidAreaDefaultX = 0;
-        solidAreaDefaultY = 0;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues(1, 1);
     }
 
     public void setDefaultValues(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.x = x*60;
+        this.y = y*60;
     }
     public void getPlantImage(String imgPath) {
         try {
@@ -40,6 +40,6 @@ public abstract class Plant extends Character {
     }
     public void draw(Graphics2D g2){
         BufferedImage image = img;
-        g2.drawImage(image, x*60, y*60, null);
+        g2.drawImage(image, x, y, null);
     }
 }

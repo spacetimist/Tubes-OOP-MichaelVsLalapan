@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Zombie extends Character implements SpeedChange {
-    public int speed;
+    public int speed = 1;
     WindowPanel wp;
 
     // attributes
@@ -31,7 +31,6 @@ public abstract class Zombie extends Character implements SpeedChange {
     public void setDefaultValues(int y) {
         x = 10*wp.tileSize;
         this.y = y*(wp.tileSize)-30; // - 30 biar lebih tinggi
-        speed = 1;
     }
     public void getZombieImage(String imgPath) {
         try {
@@ -40,47 +39,62 @@ public abstract class Zombie extends Character implements SpeedChange {
             e.printStackTrace();
         }
     }
+
+    int index;
     public void update() {
-        x -= speed; // move left
+        x -= speed; // gerak ke kiri
         direction = "left";
         collision = false;
-        wp.collision.collisionZ(this);
-        if (collision) {
+
+        if (solidArea.x == wp.tileSize) {
             speed = 0;
         }
-        int plantIndex = wp.collision.checkPlant(this, true);
+
+        // Perbarui waktu saat ini
+        long currentTime = System.currentTimeMillis();
+        long lastAttackTime = 0;
+        // Hitung waktu yang telah berlalu sejak serangan terakhir
+        long timeSinceLastAttack = currentTime - lastAttackTime;
+
+        // Lakukan serangan jika sudah melewati attack_speed
+        if (timeSinceLastAttack >= attack_speed) {
+            int index = wp.collision.checkPlant(this, true);
+            attack(index);
+             // Panggil hanya saat melakukan serangan
+            // Perbarui waktu serangan terakhir
+            lastAttackTime = currentTime;
+        }
     }
+
+    public void attack(int index) {
+        this.index = index;
+        index = wp.collision.checkPlant(this, true);
+        if(index != 999) {
+            Plant plant = wp.PlantList.get(index);
+            while(plant != null) {
+                speed = 0;
+                if(health > 0) {
+                    while(plant.health > 0) {
+                        plant.health -= attack_damage;
+                        System.out.printf("%s's health: %d\n", plant.name, plant.health);
+                    }
+                    if(plant.health <= 0) {
+                        wp.PlantList.remove(index);
+                        break;
+                    }
+                }else{
+                    wp.ZombieList.remove(this);
+                }
+
+            }
+
+        }
+    }
+
     public void draw(Graphics2D g2) {
         BufferedImage image = img;
         g2.drawImage(image, x, y, wp.tileSize, (wp.tileSize)+30, null);
     }
-
-//    public void attacking() {
-//        for(Plant plant:wp.PlantList) {
-//            for(int i=0; i<9; i++) {
-//                if(wp.map.hasPlant[i][y]) {
-//                    System.out.println(wp.map.hasPlant[i][y]);
-//                    if(plant.range != -1) {
-//                        if(x == plant.x + plant.range) {
-//                        }
-//                    }else{
-//                        this.health -= plant.attack_damage;
-//                    }
-//                }
-//                if(wp.map.hasPlant[x][y]) {
-//                    collision = true;
-//                    speed = 0;
-//                    plant.health -= this.attack_damage;
-//                }
-//            }
-//
-//        }
-//        for(Zombie z: wp.ZombieList) {
-//            if(z.health == 0){
-//                wp.ZombieList.remove(z);
-//            }
-//        }
-//    }
 
     @Override
     public void speedDecrease() {
