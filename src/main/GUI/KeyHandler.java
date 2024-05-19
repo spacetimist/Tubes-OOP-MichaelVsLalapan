@@ -17,6 +17,43 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        if(wp.gameState == wp.menuState) {
+            if(wp.state.menuScreenState == 0) {
+                if(code == KeyEvent.VK_UP) {
+                    wp.state.command--;
+                    if(wp.state.command < 0) {
+                        wp.state.command = 4;
+                    }
+                }
+                if(code == KeyEvent.VK_DOWN) {
+                    wp.state.command++;
+                    if(wp.state.command > 4) {
+                        wp.state.command = 0;
+                    }
+                }
+                if(code == KeyEvent.VK_ENTER) {
+                    if(wp.state.command == 0) {
+                        wp.gameState = wp.inventoryState;
+                    }
+                    if(wp.state.command == 1) {
+                        wp.gameState = wp.inventoryState;
+                    }
+                    if(wp.state.command == 2) {
+                        wp.state.menuScreenState = 2;
+                    }
+                    if(wp.state.command == 3) {
+                        wp.state.menuScreenState = 3;
+                    }
+                    if(wp.state.command == 4) {
+                        System.exit(0);
+                    }
+                }
+            } else {
+                if(code == KeyEvent.VK_ESCAPE) {
+                    wp.state.menuScreenState = 0;
+                }
+            }
+        }
         if(wp.gameState == wp.inventoryState) {
             if(code == KeyEvent.VK_S) {
                 wp.gameState = wp.playState;
@@ -41,7 +78,7 @@ public class KeyHandler implements KeyListener {
                     wp.state.Col++;
                 }
             }
-            if(code == KeyEvent.VK_ENTER) {
+            if(code == KeyEvent.VK_SPACE) {
                 wp.inv.deck();
             }
             if(code == KeyEvent.VK_D) {

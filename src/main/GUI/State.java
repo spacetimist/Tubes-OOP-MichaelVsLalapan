@@ -1,7 +1,10 @@
 package main.GUI;
 
 import main.Game.Map.Map;
-import main.Game.ParentClass.Plant;
+import main.Game.ParentClass.*;
+import main.Game.ParentClass.Zombie;
+import main.Game.Plants.Cactus;
+import main.Game.Menu;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -22,19 +25,24 @@ public class State {
 
     public int deckX;
     public int deckY;
-    Font arial;
+
+    public int command = 0;
+    public int menuScreenState = 0;
+    Font f1;
     public boolean messageOn = false;
     Graphics2D g2;
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
 
+
+
     double playTime;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
     public State(WindowPanel wp) {
         this.wp = wp;
-        arial = new Font("Arial", Font.PLAIN, 40);
+        f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 40);
     }
 
     public void showMessage(String text) {
@@ -44,7 +52,7 @@ public class State {
 
     public void draw(Graphics2D g2) {
         this.g2 = g2;
-        g2.setFont(arial);
+        g2.setFont(f1);
         g2.setColor(Color.WHITE);
 
         if(wp.gameState == wp.playState) {
@@ -75,6 +83,9 @@ public class State {
             deckX = 2*wp.tileSize;
             deckY = 7*wp.tileSize;
             drawCursor(deckX, deckY);
+        }
+        if(wp.gameState == wp.menuState) {
+            drawMenu();
         }
     }
 
@@ -214,6 +225,68 @@ public class State {
             g2.drawImage(plant.img, fixedPlantX, fixedPlantY, null);
 
             wp.map.hasPlant[fixedPlantX / 60][fixedPlantY / 60] = true;
+        }
+    }
+
+    public void drawMenu() {
+        if(menuScreenState == 0) {
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 56F));
+            String text = "Michael Vs. Lalapan";
+            int x = centerX(text);
+            int y = 120;
+            g2.setColor(Color.WHITE);
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
+            text = "START";
+            x = centerX(text);
+            y += 90;
+            g2.drawString(text, x, y);
+            if(command == 0) {
+                g2.drawString(">", x-30, y);
+            }
+
+            text = "HELP";
+            x = centerX(text);
+            y += 30;
+            g2.drawString(text, x, y);
+            if(command == 1) {
+                g2.drawString(">", x-30, y);
+            }
+
+            text = "PLANTS LIST";
+            x = centerX(text);
+            y += 30;
+            g2.drawString(text, x, y);
+            if(command == 2) {
+                g2.drawString(">", x-30, y);
+            }
+
+            text = "ZOMBIES LIST";
+            x = centerX(text);
+            y += 30;
+            g2.drawString(text, x, y);
+            if(command == 3) {
+                g2.drawString(">", x-30, y);
+            }
+
+            text = "EXIT";
+            x = centerX(text);
+            y += 30;
+            g2.drawString(text, x, y);
+            if(command == 4) {
+                g2.drawString(">", x-30, y);
+            }
+        }
+        else if(menuScreenState == 2) {
+            g2.setColor(Color.WHITE);
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 14F));
+            wp.plantMenu.drawList(g2);
+        }
+        else if(menuScreenState == 3) {
+            g2.setColor(Color.WHITE);
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 14F));
+            wp.zombieMenu.drawList(g2);
         }
     }
     public int centerX(String text) {

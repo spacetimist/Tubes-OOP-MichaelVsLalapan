@@ -34,42 +34,6 @@ public abstract class Plant extends Character {
             e.printStackTrace();
         }
     }
-    public void update() {
-        if(kh.upPressed || kh.downPressed || kh.leftPressed || kh.rightPressed) {
-            if (kh.upPressed) {
-                direction = "up";
-            } else if (kh.downPressed) {
-                direction = "down";
-            } else if (kh.rightPressed) {
-                direction = "right";
-            } else if (kh.leftPressed) {
-                direction = "left";
-            }
-            collision = false;
-            wp.collision.collisionP(this);
-
-            if(!collision) {
-                switch(direction) {
-                    case "up":
-                        y -= wp.tileSize;
-                        kh.upPressed = false;
-                        break;
-                    case "down":
-                        y += wp.tileSize;
-                        kh.downPressed = false;
-                        break;
-                    case "right":
-                        x += wp.tileSize;
-                        kh.rightPressed = false;
-                        break;
-                    case "left":
-                        x -= wp.tileSize;
-                        kh.leftPressed = false;
-                        break;
-                }
-            }
-        }
-    }
     public void draw(Graphics2D g2){
         BufferedImage image = img;
         g2.drawImage(image, x, y, wp.tileSize, wp.tileSize, null);
