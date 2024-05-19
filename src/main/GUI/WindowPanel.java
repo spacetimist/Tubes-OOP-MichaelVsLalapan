@@ -144,8 +144,8 @@ public class WindowPanel extends JPanel implements Runnable {
 
     public void setUp() {
         gameState = menuState; // initial state
-        zSpawn.set();
         inv.set();
+        zSpawn.set();
     }
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -178,7 +178,18 @@ public class WindowPanel extends JPanel implements Runnable {
 
         }
         if(gameState == playState || gameState == plantingState) {
-            zSpawn.run();
+            for(Zombie z:ZombieList) {
+                z.update();
+            }
+//            while(ZombieList.size() < 10) {
+//                zSpawn.set();
+//                try {
+//                    Thread.sleep(1000); // Menunda eksekusi selama 1000 milidetik (1 detik)
+//                } catch (InterruptedException e) {
+//                    // Tangani eksepsi jika terjadi
+//                    e.printStackTrace();
+//                }
+//            }
         }
     }
     public State state = new State(this);
@@ -197,16 +208,15 @@ public class WindowPanel extends JPanel implements Runnable {
         if(gameState == playState || gameState == plantingState) {
             map.draw(g2);
 
-            for(int i=0; i<Batch.length; i++) {
-                if(Batch[i] != null) {
-                    Batch[i].draw(g2);
-                }
+            for(Zombie z:ZombieList) {
+                z.draw(g2);
             }
             state.draw(g2);
         }
         if(gameState == plantingState) {
 
         }
+
         g2.dispose();
     }
 }

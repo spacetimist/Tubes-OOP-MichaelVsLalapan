@@ -10,28 +10,6 @@ public class Collision {
     public Collision(WindowPanel wp) {
         this.wp = wp;
     }
-//    public void collisionZ(Zombie z) {
-//        int zLeftX = z.x + z.solidArea.x;
-//        int zBottomY = z.y + z.solidArea.y + z.solidArea.height;
-//
-//        int zLeft = zLeftX/wp.tileSize;
-//        int zBottom = zBottomY/wp.tileSize;
-//
-//        int tile = 0;
-//
-//        zLeft = (int) ((zLeftX - z.speed)/wp.tileSize);
-//        tile = wp.map.coordinate[zLeft][zBottom];
-//        if(wp.map.area.tile[tile].collision){
-//            if(!z.collision) {
-//                z.collision = true;
-//            }
-//        }
-//        if (tile == 2) {
-//            System.out.println("You Lose");
-//        }
-//
-//    }
-
     public int checkPlant(Zombie c, boolean isZombie) {
         int index = 999;
         int i = 0;

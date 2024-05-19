@@ -85,6 +85,10 @@ public abstract class Zombie extends Character implements SpeedChange {
         }
     }
 
+    public void attacked(int i) {
+        
+    }
+
     public void draw(Graphics2D g2) {
         BufferedImage image = img;
         g2.drawImage(image, x, y, wp.tileSize, (wp.tileSize)+30, null);

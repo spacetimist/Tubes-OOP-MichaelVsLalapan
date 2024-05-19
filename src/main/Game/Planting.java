@@ -14,8 +14,6 @@ public class Planting {
         this.wp = wp;
     }
 
-    public int planted = 0;
-
     public void selectTile() {
         int sun = 100;
         for(Plant plant : wp.Deck) {
@@ -55,7 +53,7 @@ public class Planting {
 
                 wp.PlantList.add(newPlant);
                 newPlant.setDefaultValues(wp.xValue, wp.yValue);
-                System.out.println("pass selectTile");
+//                System.out.println("pass selectTile");
                 break;
             }
         }
