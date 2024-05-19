@@ -60,8 +60,8 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if(code == KeyEvent.VK_ENTER) {
-                wp.gameState = wp.plantingState;
                 wp.planting.selectTile();
+                wp.gameState = wp.plantingState;
             }
 
         }

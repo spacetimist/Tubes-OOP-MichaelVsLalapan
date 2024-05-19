@@ -14,6 +14,8 @@ public abstract class Plant extends Character {
     KeyHandler kh;
     // attributes
     public int cost, range, cooldown;
+    public int x2, y2;
+    public int x3, y3;
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
         this.kh = kh;
@@ -21,9 +23,9 @@ public abstract class Plant extends Character {
 //        setDefaultValues(x, y);
     }
 
-    public void setDefaultValues(int x, int y) {
-        this.x = x*wp.tileSize;
-        this.y = y*wp.tileSize;
+    public void setDefaultValues(int x2, int y2) {
+        this.x2 = x2;
+        this.y2 = y2;
     }
     public void getPlantImage(String imgPath) {
         try {

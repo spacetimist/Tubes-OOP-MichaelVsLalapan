@@ -59,7 +59,7 @@ public class State {
             plantX = wp.tileSize;
             plantY = wp.tileSize;
             movePlant();
-//            drawPlant(g2);
+            drawPlant(g2);
         }
         if(wp.gameState == wp.inventoryState) {
             drawInventory();
@@ -172,26 +172,16 @@ public class State {
     public int plantRow = 0 ;
 
     public void movePlant() {
-
-
-//        while(plantMapY <= 6 && wp.map.hasPlant[plantMapX][plantMapY]) {
-//            while(plantMapX <= 9 && wp.map.hasPlant[plantMapX][plantMapY]) {
-//                plantMapX++;
-//                break;
-//            }
-//            plantMapY++;
-//            break;
-//        }
-
         plantMapX = 1;
         plantMapY = 1;
         if(wp.PlantList.size() != 0) {
             Plant plant = wp.PlantList.get(wp.PlantList.size() - 1);
             plantX = plantMapX*wp.tileSize + (wp.tileSize * plantCol);
             plantY = plantMapY*wp.tileSize + (wp.tileSize * plantRow);
-            plant.x = plantX;
-            plant.y = plantY;
-//            g2.drawImage(plant.img, plantX, plantY, null);
+            plant.setDefaultValues(plantX, plantY);
+            plant.x3 = plant.x2;
+            plant.y3 = plant.y2;
+            g2.drawImage(plant.img, plant.x3, plant.y3, null);
 //            if(!wp.map.hasPlant[plant.x/60][plant.y/60]) {
 //            wp.map.hasPlant[plant.x/60][plant.y/60] = true;
 //
@@ -211,28 +201,19 @@ public class State {
     }
 
     public void drawPlant(Graphics2D g2) {
-
         this.g2 = g2;
-//        if(wp.PlantList.size() > 1) {
-//            Plant plant = wp.PlantList.get(wp.PlantList.size() - 2);
-//            int fixedPlantX = Integer.parseInt(String.valueOf(plantX));
-//            int fixedPlantY = Integer.parseInt(String.valueOf(plantY));
-//            System.out.println(fixedPlantX);
-//            System.out.println(fixedPlantY);
-////            plant.draw(g2);
-//            g2.drawImage(plant.img, fixedPlantX, fixedPlantY, null);
-//            wp.map.hasPlant[plant.x/60][plant.y/60] = true;
-//        }
-        for(Plant plant:wp.PlantList) {
-            int fixedPlantX = Integer.parseInt(String.valueOf(plantX));
-            int fixedPlantY = Integer.parseInt(String.valueOf(plantY));
-            System.out.println(fixedPlantX);
-            System.out.println(fixedPlantY);
+        for(Plant plant : wp.PlantList) {
+//            plant.x3 = plant.x2;
+//            plant.y3 = plant.y2;
+            int fixedPlantX = plant.x3;
+            int fixedPlantY = plant.y3;
+//            plant.x = fixedPlantX;
+//            plant.y = fixedPlantY;
 //            plant.draw(g2);
+
             g2.drawImage(plant.img, fixedPlantX, fixedPlantY, null);
-            wp.map.hasPlant[fixedPlantX/60][fixedPlantY/60] = true;
-            //            plant.x = fixedPlantX;
-            //            plant.y = fixedPlantY;
+
+            wp.map.hasPlant[fixedPlantX / 60][fixedPlantY / 60] = true;
         }
     }
     public int centerX(String text) {

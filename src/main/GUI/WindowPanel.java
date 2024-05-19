@@ -37,7 +37,7 @@ public class WindowPanel extends JPanel implements Runnable {
 
     // instantiate plant list, zombie list
     public ArrayList<Plant> PlantList = new ArrayList<>();
-    public Zombie ZombieList[] = new Zombie[10];
+    public ArrayList<Zombie> ZombieList = new ArrayList<>();
     // deck and inventory
     public ArrayList<Plant> Deck = new ArrayList<>(6);
     public ArrayList<Plant> Inventory = new ArrayList<>(10);
@@ -56,6 +56,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int inventoryState = 2;
     public final int deckState = 3;
     public final int plantingState = 4;
+    public final int State = 5;
 
     int i;
 
