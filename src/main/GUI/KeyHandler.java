@@ -36,7 +36,7 @@ public class KeyHandler implements KeyListener {
                         wp.gameState = wp.inventoryState;
                     }
                     if(wp.state.command == 1) {
-                        wp.gameState = wp.inventoryState;
+                        wp.state.menuScreenState = 1;
                     }
                     if(wp.state.command == 2) {
                         wp.state.menuScreenState = 2;
