@@ -4,8 +4,7 @@
 Tugas Besar IF2212 Pemrograman Berorientasi Objek STI 2024
 
 ## Deskripsi
-<center><img src="src/main/Resources/Cover.png" width=300></center>
-
+<img src="src/main/Resources/Cover.png" width=300 style="display:block; margin:auto;" >
 <p align="justify">
 Michael vs. Lalapan adalah versi yang lebih sederhana dari permainan terkenal Plant vs. Zombies. Tujuan permainan adalah melindungi rumah pemain dari serangan zombie dengan menanam tanaman secara strategis. Ada berbagai jenis tanaman yang dapat menyerang zombie, dan pemain harus menanamnya dengan bijaksana untuk menjaga keamanan rumah. Setiap tanaman dan zombie memiliki aksi unik tersendiri.
 
