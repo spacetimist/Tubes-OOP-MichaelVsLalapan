@@ -238,6 +238,7 @@ public class State {
             String text = "HELP";
             int x = centerX(text);
             int y = 60;
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
             g2.drawString(text, x, y);
             x = 110;
             y += 40;
@@ -256,7 +257,7 @@ public class State {
             g2.drawString("Bantulah Bandung Bondowoso untuk menyusun strategi!!", x, y);
 
             g2.setColor(Color.WHITE);
-            x = 265;
+            x = 260;
             y += 40;
             g2.drawString("Aturan permainan", x, y);
             x = 80;
@@ -271,7 +272,7 @@ public class State {
             y += 20;
             g2.drawString("5. Terus menanam hingga zombie mati dan permainan selesai", x, y);
 
-            x = 290;
+            x = 280;
             y += 40;
             g2.drawString("Command", x, y);
             x = 80;
@@ -298,7 +299,7 @@ public class State {
     }
 
     public void playTime() {
-        playTime += (double) 1/60;
+        playTime += (double) (System.currentTimeMillis()/1000);
         String text = "Time: " + dFormat.format(playTime);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
         int x = 550;
