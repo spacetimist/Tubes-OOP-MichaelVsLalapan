@@ -224,10 +224,10 @@ public class State {
             g2.setColor(Color.WHITE);
             String text = "HELP";
             int x = centerX(text);
-            int y = 80;
+            int y = 60;
             g2.drawString(text, x, y);
             x = 110;
-            y += 50;
+            y += 40;
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
             g2.setColor(Color.YELLOW);
             g2.drawString("Roro Jonggrang diserang oleh pasukan jin yang menjadi zombie.", x, y);
@@ -246,7 +246,7 @@ public class State {
             x = 265;
             y += 40;
             g2.drawString("Aturan permainan", x, y);
-            x = 125;
+            x = 80;
             y += 20;
             g2.drawString("1. Start game", x, y);
             y += 20;
@@ -258,10 +258,10 @@ public class State {
             y += 20;
             g2.drawString("5. Terus menanam hingga zombie mati dan permainan selesai", x, y);
 
-            x = 300;
+            x = 290;
             y += 40;
             g2.drawString("Command", x, y);
-            x = 125;
+            x = 80;
             y += 20;
             g2.drawString("1. 'ESC' untuk keluar dari menu help, plants list dan zombies list", x, y);
             y += 20;
@@ -269,7 +269,9 @@ public class State {
             y += 20;
             g2.drawString("3. 'd' untuk pindah dari inventory ke deck", x, y);
             y += 20;
-            g2.drawString("4. 'ENTER' untuk menyeleksi tanaman", x, y);
+            g2.drawString("4. 'SPACE' untuk memilih tanaman dari inventory", x, y);
+            y += 20;
+            g2.drawString("5. 'ENTER' untuk mengembalikan tanaman ke inventory dan menanam tanaman", x, y);
         }
 
         else if(menuScreenState == 2) {
