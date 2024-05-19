@@ -5,6 +5,7 @@ import main.Game.ParentClass.Plant;
 
 import java.awt.*;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class State {
     WindowPanel wp;
@@ -18,6 +19,7 @@ public class State {
     public int inventoryY;
     public int plantMapX;
     public int plantMapY;
+
     public int deckX;
     public int deckY;
     Font arial;
@@ -49,13 +51,15 @@ public class State {
             drawDeck();
             deckX = 2*wp.tileSize;
             deckY = 7*wp.tileSize;
-            plantX = wp.tileSize;
-            plantY = wp.tileSize;
-            drawPlant();
             drawCursor(deckX, deckY);
+//            movePlant();
+            drawPlant(g2);
         }
         if(wp.gameState == wp.plantingState) {
-//            wp.planting.selectTile();
+            plantX = wp.tileSize;
+            plantY = wp.tileSize;
+            movePlant();
+            drawPlant(g2);
         }
         if(wp.gameState == wp.inventoryState) {
             drawInventory();
@@ -143,49 +147,74 @@ public class State {
 //        }
             g2.drawRoundRect(cursorX, cursorY, wp.tileSize, wp.tileSize, 10, 10);
 
+
     }
 
-//    public void drawCursor2(int startX, int startY) {
-//        cursorX = startX + (wp.tileSize * plantCol);
-//        cursorY = startY + (wp.tileSize * plantRow);
-//
-//        g2.setColor(Color.WHITE);
-//        g2.setStroke(new BasicStroke(3));
-////        if(!wp.map.hasPlant[cursorX][cursorY]) {
-////
-////        }
-//        g2.drawRoundRect(cursorX, cursorY, wp.tileSize, wp.tileSize, 10, 10);
-//
-//    }
+    public void drawCursor2(int startX, int startY) {
+        cursorX = startX + (wp.tileSize * plantCol);
+        cursorY = startY + (wp.tileSize * plantRow);
 
-    public int plantCol = 0;
-    public int plantRow = -1 ;
-
-    public void drawPlant() {
-
-//        wp.map.hasPlant[x][y] = true;
-        plantMapX = 1;
-        plantMapY = 1;
-
-//        while(plantMapY <= 6 && wp.map.hasPlant[plantMapX][plantMapY]) {
-//            while(plantMapX <= 9 && wp.map.hasPlant[plantMapX][plantMapY]) {
-//                plantMapX++;
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new BasicStroke(3));
+//        while(cursorX/60 <= 6 && wp.map.hasPlant[cursorX/60][cursorY/60]) {
+//            while(cursorY/60 <= 9 && wp.map.hasPlant[cursorX/60][cursorY/60]) {
+//                cursorX += wp.tileSize;
 //                break;
 //            }
-//            plantMapY++;
+//            cursorY += wp.tileSize;
 //            break;
 //        }
+        g2.drawRoundRect(cursorX, cursorY, wp.tileSize, wp.tileSize, 10, 10);
 
-        plantX = plantMapX*wp.tileSize + (wp.tileSize * plantCol);
-        plantY = plantMapY*wp.tileSize + (wp.tileSize * plantRow);
-        System.out.println(plantCol);
-        System.out.println(plantRow);
+    }
+
+    public int plantCol = 0;
+    public int plantRow = 0 ;
+
+    public void movePlant() {
+        plantMapX = 1;
+        plantMapY = 1;
         if(wp.PlantList.size() != 0) {
             Plant plant = wp.PlantList.get(wp.PlantList.size() - 1);
-            g2.drawImage(plant.img, plantX, plantY, null);
-
+            plantX = plantMapX*wp.tileSize + (wp.tileSize * plantCol);
+            plantY = plantMapY*wp.tileSize + (wp.tileSize * plantRow);
+            plant.setDefaultValues(plantX, plantY);
+            plant.x3 = plant.x2;
+            plant.y3 = plant.y2;
+            g2.drawImage(plant.img, plant.x3, plant.y3, null);
+//            if(!wp.map.hasPlant[plant.x/60][plant.y/60]) {
+//            wp.map.hasPlant[plant.x/60][plant.y/60] = true;
+//
+//            }
+//            else {
+//                if(plantCol < 8) {
+//                    plantCol++;
+//                }else{
+//                    if(plantRow < 5) {
+//                        plantRow++;
+//                        plantCol = 0;
+//                    }
+//                }
+//            }
         }
 
+    }
+
+    public void drawPlant(Graphics2D g2) {
+        this.g2 = g2;
+        for(Plant plant : wp.PlantList) {
+//            plant.x3 = plant.x2;
+//            plant.y3 = plant.y2;
+            int fixedPlantX = plant.x3;
+            int fixedPlantY = plant.y3;
+//            plant.x = fixedPlantX;
+//            plant.y = fixedPlantY;
+//            plant.draw(g2);
+
+            g2.drawImage(plant.img, fixedPlantX, fixedPlantY, null);
+
+            wp.map.hasPlant[fixedPlantX / 60][fixedPlantY / 60] = true;
+        }
     }
     public int centerX(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();

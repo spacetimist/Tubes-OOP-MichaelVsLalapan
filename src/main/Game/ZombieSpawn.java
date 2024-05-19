@@ -28,7 +28,8 @@ public class ZombieSpawn extends Thread {
 
         int j = 0;
         int i = 0;
-        while (n < 10) {
+                    wp.ZombieList.add(generateRandomZombie()); // Menghasilkan zombie secara acak
+        for(Zombie zombie: wp.ZombieList) {
             j = 0;
             i = 0;
 
@@ -39,23 +40,22 @@ public class ZombieSpawn extends Thread {
                         System.out.println("break di sini");
                         break;
                     }
-                    wp.ZombieList[n] = generateRandomZombie(); // Menghasilkan zombie secara acak
-                    if (wp.ZombieList[n].is_aquatic) {
+                    if (zombie.is_aquatic) {
                         if (i != 2 && i != 3) {
-                            while (wp.ZombieList[n].is_aquatic) {
-                                wp.ZombieList[n] = generateRandomZombie();
+                            while (zombie.is_aquatic) {
+                                zombie = generateRandomZombie();
                             }
                         }
-                        wp.ZombieList[n].setDefaultValues(lane[i]);
-                        wp.Batch[j] = wp.ZombieList[n];
+                        zombie.setDefaultValues(lane[i]);
+                        wp.Batch[j] = zombie;
                     } else {
                         if (i == 2 || i == 3) {
-                            while (!wp.ZombieList[n].is_aquatic) {
-                                wp.ZombieList[n] = generateRandomZombie();
+                            while (!zombie.is_aquatic) {
+                                zombie = generateRandomZombie();
                             }
                         }
-                        wp.ZombieList[n].setDefaultValues(lane[i]);
-                        wp.Batch[j] = wp.ZombieList[n];
+                        zombie.setDefaultValues(lane[i]);
+                        wp.Batch[j] = zombie;
                     }
                     j++;
                     if(j == i) {

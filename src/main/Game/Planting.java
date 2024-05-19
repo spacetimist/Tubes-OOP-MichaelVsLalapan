@@ -20,9 +20,13 @@ public class Planting {
             if(plant.x == wp.state.cursorX && plant.y == wp.state.cursorY) {
 //                System.out.print(wp.Deck.size());
                 wp.PlantList.add(plant);
+                System.out.println(wp.PlantList.size());
                 System.out.println("pass selectTile");
                 break;
             }
         }
     }
+//    public void plantHere(Plant plant) {
+//        plant = new
+//    }
 }

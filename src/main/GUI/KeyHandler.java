@@ -59,32 +59,9 @@ public class KeyHandler implements KeyListener {
                     wp.state.Col++;
                 }
             }
-            if(code == KeyEvent.VK_W) {
-                if(wp.state.plantRow != 0) {
-                    wp.state.plantRow--;
-                }
-            }
-            if(code == KeyEvent.VK_A) {
-                if(wp.state.plantCol != 0) {
-                    wp.state.plantCol--;
-                }
-            }
-            if(code == KeyEvent.VK_S) {
-                if(wp.state.plantRow != 5) {
-                    wp.state.plantRow++;
-                }
-            }
-            if(code == KeyEvent.VK_D) {
-                if(wp.state.plantCol != 8) {
-                    wp.state.plantCol++;
-                }
-            }
             if(code == KeyEvent.VK_ENTER) {
-                wp.gameState = wp.plantingState;
                 wp.planting.selectTile();
-            }
-            if(code == KeyEvent.VK_SPACE) {
-
+                wp.gameState = wp.plantingState;
             }
 
         }
@@ -110,6 +87,9 @@ public class KeyHandler implements KeyListener {
             }
         }
         if(wp.gameState == wp.plantingState) {
+            if(code == KeyEvent.VK_SPACE) {
+                wp.gameState = wp.playState;
+            }
             if(code == KeyEvent.VK_W) {
                 if(wp.state.plantRow != 0) {
                     wp.state.plantRow--;
@@ -129,9 +109,6 @@ public class KeyHandler implements KeyListener {
                 if(wp.state.plantCol != 8) {
                     wp.state.plantCol++;
                 }
-            }
-            if(code == KeyEvent.VK_ENTER) {
-                wp.gameState = wp.playState;
             }
         }
     }
