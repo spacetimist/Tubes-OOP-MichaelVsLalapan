@@ -46,24 +46,12 @@ public abstract class Zombie extends Character implements SpeedChange {
         direction = "left";
         collision = false;
 
-        if (solidArea.x == wp.tileSize) {
+        if (x == 30) {
             speed = 0;
         }
 
-        // Perbarui waktu saat ini
-        long currentTime = System.currentTimeMillis();
-        long lastAttackTime = 0;
-        // Hitung waktu yang telah berlalu sejak serangan terakhir
-        long timeSinceLastAttack = currentTime - lastAttackTime;
-
-        // Lakukan serangan jika sudah melewati attack_speed
-        if (timeSinceLastAttack >= attack_speed) {
-            int index = wp.collision.checkPlant(this, true);
-            attack(index);
-             // Panggil hanya saat melakukan serangan
-            // Perbarui waktu serangan terakhir
-            lastAttackTime = currentTime;
-        }
+        int index = wp.collision.checkPlant(this, true);
+        attack(index);
     }
 
     public void attack(int index) {
@@ -72,10 +60,15 @@ public abstract class Zombie extends Character implements SpeedChange {
         if(index != 999) {
             Plant plant = wp.PlantList.get(index);
             while(plant != null) {
-                speed = 0;
+                this.speed = 0;
                 if(health > 0) {
                     while(plant.health > 0) {
                         plant.health -= attack_damage;
+                        try {
+                            Thread.sleep(attack_speed*1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         System.out.printf("%s's health: %d\n", plant.name, plant.health);
                     }
                     if(plant.health <= 0) {
@@ -87,6 +80,7 @@ public abstract class Zombie extends Character implements SpeedChange {
                 }
 
             }
+            this.speed = 1;
 
         }
     }
