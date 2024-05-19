@@ -40,6 +40,6 @@ public abstract class Plant extends Character {
     }
     public void draw(Graphics2D g2){
         BufferedImage image = img;
-        g2.drawImage(image, x, y, wp.tileSize, wp.tileSize, null);
+        g2.drawImage(image, x*60, y*60, null);
     }
 }

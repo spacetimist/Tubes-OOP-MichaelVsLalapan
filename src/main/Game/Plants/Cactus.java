@@ -8,6 +8,7 @@ public class Cactus extends Plant {
         super(wp, kh);
         getPlantImage("src/main/Resources/Plants/cactus.png");
         name = "Cactus";
+        description = "Tanaman yang dapat memecahkan balon di punggung balloon zombie.";
         cost = 175;
         health = 500;
         attack_damage = 100;

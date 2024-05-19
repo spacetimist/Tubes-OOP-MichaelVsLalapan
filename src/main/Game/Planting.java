@@ -5,6 +5,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 import main.Game.Plants.*;
 
+import java.rmi.server.ServerNotActiveException;
+
 public class Planting {
     WindowPanel wp;
     KeyHandler kh;
@@ -19,14 +21,45 @@ public class Planting {
         for(Plant plant : wp.Deck) {
             if(plant.x == wp.state.cursorX && plant.y == wp.state.cursorY) {
 //                System.out.print(wp.Deck.size());
-                wp.PlantList.add(plant);
+                Plant newPlant = null;
+                if (plant instanceof Cactus) {
+                    newPlant = new Cactus(wp, kh);
+                }
+                if (plant instanceof Jalapeno) {
+                    newPlant = new Jalapeno(wp, kh);
+                }
+                if (plant instanceof Lilypad) {
+                    newPlant = new Lilypad(wp, kh);
+                }
+                if (plant instanceof PeaShooter) {
+                    newPlant = new PeaShooter(wp, kh);
+                }
+                if (plant instanceof Repeater) {
+                    newPlant = new Repeater(wp, kh);
+                }
+                if (plant instanceof SnowPea) {
+                    newPlant = new SnowPea(wp, kh);
+                }
+                if (plant instanceof Squash) {
+                    newPlant = new Squash(wp, kh);
+                }
+                if (plant instanceof Sunflower) {
+                    newPlant = new Sunflower(wp, kh);
+                }
+                if (plant instanceof Tallnut) {
+                    newPlant = new Tallnut(wp, kh);
+                }
+                if (plant instanceof Wallnut) {
+                    newPlant = new Wallnut(wp, kh);
+                }
+
+                wp.PlantList.add(newPlant);
                 System.out.println(wp.PlantList.size());
+                newPlant.x = wp.xValue;
+                newPlant.y = wp.yValue;
                 System.out.println("pass selectTile");
                 break;
             }
         }
     }
-//    public void plantHere(Plant plant) {
-//        plant = new
-//    }
 }

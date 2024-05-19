@@ -64,7 +64,7 @@ public class WindowPanel extends JPanel implements Runnable {
     Menu<Plant> plantMenu = new Menu<>(this, plantList);
     Menu<Zombie> zombieMenu = new Menu<>(this, zombieList);
     int i;
-
+    public int xValue, yValue;
     public WindowPanel() {
         i = 0;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -87,16 +87,59 @@ public class WindowPanel extends JPanel implements Runnable {
         plantList.add(new Tallnut(this, kh));
         plantList.add(new Wallnut(this, kh));
 
-        zombieList.add(new BalloonZombie((this)));
-        zombieList.add(new BucketheadZombie((this)));
-        zombieList.add(new ConeheadZombie((this)));
-        zombieList.add(new DolphinRiderZombie((this)));
-        zombieList.add(new DuckyTubeZombie((this)));
-        zombieList.add(new FootballZombie((this)));
-        zombieList.add(new NewspaperZombie((this)));
-        zombieList.add(new NormalZombie((this)));
-        zombieList.add(new PoleVaultingZombie((this)));
-        zombieList.add(new ScreenDoorZombie((this)));
+        zombieList.add(new BalloonZombie(this));
+        zombieList.add(new BucketheadZombie(this));
+        zombieList.add(new ConeheadZombie(this));
+        zombieList.add(new DolphinRiderZombie(this));
+        zombieList.add(new DuckyTubeZombie(this));
+        zombieList.add(new FootballZombie(this));
+        zombieList.add(new NewspaperZombie(this));
+        zombieList.add(new NormalZombie(this));
+        zombieList.add(new PoleVaultingZombie(this));
+        zombieList.add(new ScreenDoorZombie(this));
+    }
+
+    public void openInputDialog() {
+        JDialog dialog = new JDialog((Frame) null, "Input Variables", true);
+        dialog.setSize(300, 200);
+        dialog.setLayout(null);
+
+        JLabel xLabel = new JLabel("Enter x:");
+        xLabel.setBounds(20, 20, 80, 25);
+        dialog.add(xLabel);
+
+        JTextField xField = new JTextField();
+        xField.setBounds(100, 20, 160, 25);
+        dialog.add(xField);
+
+        JLabel yLabel = new JLabel("Enter y:");
+        yLabel.setBounds(20, 60, 80, 25);
+        dialog.add(yLabel);
+
+        JTextField yField = new JTextField();
+        yField.setBounds(100, 60, 160, 25);
+        dialog.add(yField);
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setBounds(100, 100, 80, 25);
+        dialog.add(submitButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    xValue = Integer.parseInt(xField.getText());
+                    yValue = Integer.parseInt(yField.getText());
+                    System.out.println("x: " + xValue + ", y: " + yValue);  // Cetak nilai ke konsol
+                    dialog.dispose();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(dialog, "Please enter valid integers.");
+                }
+            }
+        });
+
+        dialog.setVisible(true);
+
     }
 
     public void setUp() {
@@ -160,7 +203,8 @@ public class WindowPanel extends JPanel implements Runnable {
                 }
             }
             state.draw(g2);
-            state.drawPlant(g2);
+        }
+        if(gameState == plantingState) {
 
         }
         g2.dispose();

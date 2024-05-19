@@ -8,6 +8,7 @@ public class SnowPea extends Plant {
         super(wp, kh);
         getPlantImage("src/main/Resources/Plants/snowpea.png");
         name = "Snow pea";
+        description = "Tanaman spesial yang memiliki kemampuan slowing.";
         cost = 175;
         health = 100;
         attack_damage = 25;

@@ -12,6 +12,7 @@ public class Tallnut extends Plant {
 
 
         name = "Tall nut";
+        description = "Tanaman yang menyerupai wallnut namun dengan tambahan health yang tinggi.";
         cost = 125;
         health = 2000;
         attack_damage = 0;

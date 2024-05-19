@@ -49,7 +49,6 @@ public abstract class Zombie extends Character implements SpeedChange {
             speed = 0;
         }
         int plantIndex = wp.collision.checkPlant(this, true);
-        System.out.println(plantIndex);
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = img;

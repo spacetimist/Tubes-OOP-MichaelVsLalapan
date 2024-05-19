@@ -6,9 +6,11 @@ import main.Game.ParentClass.Zombie;
 import main.Game.Plants.Cactus;
 import main.Game.Menu;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.util.Scanner;
 
 public class State {
     WindowPanel wp;
@@ -20,9 +22,6 @@ public class State {
     public int Row = 0 ;
     public int inventoryX;
     public int inventoryY;
-    public int plantMapX;
-    public int plantMapY;
-
     public int deckX;
     public int deckY;
 
@@ -34,7 +33,9 @@ public class State {
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
-
+//    public int xValue;
+//    public int yValue;
+    private boolean inputDialogShown = false;
 
 
     double playTime;
@@ -64,9 +65,6 @@ public class State {
             drawPlant(g2);
         }
         if(wp.gameState == wp.plantingState) {
-            plantX = wp.tileSize;
-            plantY = wp.tileSize;
-            movePlant();
             drawPlant(g2);
         }
         if(wp.gameState == wp.inventoryState) {
@@ -161,68 +159,21 @@ public class State {
 
     }
 
-    public void drawCursor2(int startX, int startY) {
-        cursorX = startX + (wp.tileSize * plantCol);
-        cursorY = startY + (wp.tileSize * plantRow);
-
-        g2.setColor(Color.WHITE);
-        g2.setStroke(new BasicStroke(3));
-//        while(cursorX/60 <= 6 && wp.map.hasPlant[cursorX/60][cursorY/60]) {
-//            while(cursorY/60 <= 9 && wp.map.hasPlant[cursorX/60][cursorY/60]) {
-//                cursorX += wp.tileSize;
-//                break;
-//            }
-//            cursorY += wp.tileSize;
-//            break;
-//        }
-        g2.drawRoundRect(cursorX, cursorY, wp.tileSize, wp.tileSize, 10, 10);
-
-    }
-
-    public int plantCol = 0;
-    public int plantRow = 0 ;
-
-    public void movePlant() {
-        plantMapX = 1;
-        plantMapY = 1;
-        if(wp.PlantList.size() != 0) {
-            Plant plant = wp.PlantList.get(wp.PlantList.size() - 1);
-            plantX = plantMapX*wp.tileSize + (wp.tileSize * plantCol);
-            plantY = plantMapY*wp.tileSize + (wp.tileSize * plantRow);
-            plant.setDefaultValues(plantX, plantY);
-
-//            if(!wp.map.hasPlant[plant.x/60][plant.y/60]) {
-//            wp.map.hasPlant[plant.x/60][plant.y/60] = true;
-//
-//            }
-//            else {
-//                if(plantCol < 8) {
-//                    plantCol++;
-//                }else{
-//                    if(plantRow < 5) {
-//                        plantRow++;
-//                        plantCol = 0;
-//                    }
-//                }
-//            }
-        }
-
-    }
-
     public void drawPlant(Graphics2D g2) {
         this.g2 = g2;
         for(Plant plant : wp.PlantList) {
 //            plant.x3 = plant.x2;
 //            plant.y3 = plant.y2;
-            int fixedPlantX = plant.x;
-            int fixedPlantY = plant.y;
+//            plant.x = wp.xValue;
+//            plant.y = wp.yValue;
+
 //            plant.x = fixedPlantX;
 //            plant.y = fixedPlantY;
 //            plant.draw(g2);
+            plant.draw(g2);
+//            g2.drawImage(plant.img, wp.xValue*60, wp.yValue*60, null);
 
-            g2.drawImage(plant.img, fixedPlantX, fixedPlantY, null);
-
-            wp.map.hasPlant[fixedPlantX / 60][fixedPlantY / 60] = true;
+            wp.map.hasPlant[wp.xValue][wp.yValue] = true;
         }
     }
 
@@ -276,14 +227,18 @@ public class State {
                 g2.drawString(">", x-30, y);
             }
         }
+
+        else if(menuScreenState == 1) {
+            g2.setColor(Color.WHITE);
+
+        }
+
         else if(menuScreenState == 2) {
             g2.setColor(Color.WHITE);
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 14F));
             wp.plantMenu.drawList(g2);
         }
         else if(menuScreenState == 3) {
             g2.setColor(Color.WHITE);
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 14F));
             wp.zombieMenu.drawList(g2);
         }
     }
@@ -292,4 +247,6 @@ public class State {
         int x = wp.screenWidth/2 - length/2;
         return x;
     }
+
+    // Getter untuk mendapatkan nilai x dan y
 }

@@ -10,8 +10,8 @@ public abstract class Character {
     public boolean collision;
     public Rectangle solidArea;
 
-    // attributes
-    public String name;
     public int solidAreaDefaultX, solidAreaDefaultY;
+
+    public String name, description;
     public int health, attack_damage, attack_speed;
 }

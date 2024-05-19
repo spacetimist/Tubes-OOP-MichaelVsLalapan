@@ -9,6 +9,7 @@ public class BucketheadZombie extends Zombie {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/buckethead.png");
         name = "Buckethead Zombie";
+        description = "Zombie yang menggunakan atribut ember di kepala dan memiliki ekstra health.";
         health = 300;
         attack_damage = 100;
         attack_speed = 1;

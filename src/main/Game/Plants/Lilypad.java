@@ -8,6 +8,7 @@ public class Lilypad extends Plant {
         super(wp, kh);
         getPlantImage("src/main/Resources/Plants/lilypad.png");
         name = "Lilypad";
+        description = "Tanaman spesial yang menjadi media tanam untuk tanaman lain.";
         cost = 25;
         health = 100;
         attack_damage = 0;

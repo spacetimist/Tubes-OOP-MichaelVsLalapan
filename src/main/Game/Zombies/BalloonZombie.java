@@ -8,6 +8,7 @@ public class BalloonZombie extends Zombie {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/balloon.png");
         name = "Balloon Zombie";
+        description = "Zombie yang menggunakan balon merah di punggung untuk melayang di atas tanaman.";
         health = 230;
         attack_damage = 100;
         attack_speed = 1;
