@@ -26,9 +26,9 @@ public class ZombieSpawn extends Thread {
     public void set() {
         // 10 zombie yang dispawn
 
-        int j = 0;
-        int i = 0;
-                    wp.ZombieList.add(generateRandomZombie()); // Menghasilkan zombie secara acak
+        int j;
+        int i;
+        wp.ZombieList.add(generateRandomZombie()); // Menghasilkan zombie secara acak
         for(Zombie zombie: wp.ZombieList) {
             j = 0;
             i = 0;

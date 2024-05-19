@@ -10,7 +10,6 @@ public class Menu<T extends Character> {
     private List<T> characterList;
     WindowPanel wp;
     Graphics2D g2;
-    T character;
     public Menu(WindowPanel wp, List<T> characterList) {
         this.wp = wp;
         this.characterList = characterList;

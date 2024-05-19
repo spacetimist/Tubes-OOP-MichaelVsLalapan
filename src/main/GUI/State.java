@@ -190,9 +190,7 @@ public class State {
             plantX = plantMapX*wp.tileSize + (wp.tileSize * plantCol);
             plantY = plantMapY*wp.tileSize + (wp.tileSize * plantRow);
             plant.setDefaultValues(plantX, plantY);
-            plant.x3 = plant.x2;
-            plant.y3 = plant.y2;
-            g2.drawImage(plant.img, plant.x3, plant.y3, null);
+
 //            if(!wp.map.hasPlant[plant.x/60][plant.y/60]) {
 //            wp.map.hasPlant[plant.x/60][plant.y/60] = true;
 //
@@ -216,8 +214,8 @@ public class State {
         for(Plant plant : wp.PlantList) {
 //            plant.x3 = plant.x2;
 //            plant.y3 = plant.y2;
-            int fixedPlantX = plant.x3;
-            int fixedPlantY = plant.y3;
+            int fixedPlantX = plant.x;
+            int fixedPlantY = plant.y;
 //            plant.x = fixedPlantX;
 //            plant.y = fixedPlantY;
 //            plant.draw(g2);

@@ -14,7 +14,6 @@ import java.io.IOException;
 public abstract class Zombie extends Character implements SpeedChange {
     public int speed;
     WindowPanel wp;
-    public Rectangle solidArea;
 
     // attributes
     public boolean is_aquatic = false;
@@ -24,8 +23,9 @@ public abstract class Zombie extends Character implements SpeedChange {
 
         // make solid area smaller than tilesize (60*60)
         solidArea = new Rectangle(20, 20, 48, 48);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         setDefaultValues(1);
-        attacking();
     }
 
     public void setDefaultValues(int y) {
@@ -48,39 +48,40 @@ public abstract class Zombie extends Character implements SpeedChange {
         if (collision) {
             speed = 0;
         }
-
+        int plantIndex = wp.collision.checkPlant(this, true);
+        System.out.println(plantIndex);
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = img;
         g2.drawImage(image, x, y, wp.tileSize, (wp.tileSize)+30, null);
     }
 
-    public void attacking() {
-        for(Plant plant:wp.PlantList) {
-            for(int i=0; i<9; i++) {
-                if(wp.map.hasPlant[i][y]) {
-                    System.out.println(wp.map.hasPlant[i][y]);
-                    if(plant.range != -1) {
-                        if(x == plant.x2 + plant.range) {
-                        }
-                    }else{
-                        this.health -= plant.attack_damage;
-                    }
-                }
-                if(wp.map.hasPlant[x][y]) {
-                    collision = true;
-                    speed = 0;
-                    plant.health -= this.attack_damage;
-                }
-            }
-
-        }
-        for(Zombie z: wp.ZombieList) {
-            if(z.health == 0){
-                wp.ZombieList.remove(z);
-            }
-        }
-    }
+//    public void attacking() {
+//        for(Plant plant:wp.PlantList) {
+//            for(int i=0; i<9; i++) {
+//                if(wp.map.hasPlant[i][y]) {
+//                    System.out.println(wp.map.hasPlant[i][y]);
+//                    if(plant.range != -1) {
+//                        if(x == plant.x + plant.range) {
+//                        }
+//                    }else{
+//                        this.health -= plant.attack_damage;
+//                    }
+//                }
+//                if(wp.map.hasPlant[x][y]) {
+//                    collision = true;
+//                    speed = 0;
+//                    plant.health -= this.attack_damage;
+//                }
+//            }
+//
+//        }
+//        for(Zombie z: wp.ZombieList) {
+//            if(z.health == 0){
+//                wp.ZombieList.remove(z);
+//            }
+//        }
+//    }
 
     @Override
     public void speedDecrease() {
