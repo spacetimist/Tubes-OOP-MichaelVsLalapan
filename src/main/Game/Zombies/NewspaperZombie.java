@@ -9,6 +9,7 @@ public class NewspaperZombie extends Zombie {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/newspaper.png");
         name = "Newspaper Zombie";
+        description = "Zombie yang muncul sambil membaca koran dan kecepatan bertambah ketika koran hancur.";
         health = 375;
         attack_damage = 200;
         attack_speed = 1;

@@ -8,6 +8,7 @@ public class Repeater extends Plant {
         super(wp, kh);
         getPlantImage("src/main/Resources/Plants/repeater.png");
         name = "Repeater";
+        description = "Tanaman dengan attack damage 2 kali lebih besar daripada peashooter.";
         cost = 200;
         health = 300;
         attack_damage = 50;

@@ -10,6 +10,6 @@ public abstract class Character {
     public boolean collision;
 
     // attributes
-    public String name;
+    public String name, description;
     public int health, attack_damage, attack_speed;
 }

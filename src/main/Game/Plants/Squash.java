@@ -8,6 +8,7 @@ public class Squash extends Plant {
         super(wp, kh);
         getPlantImage("src/main/Resources/Plants/squash.png");
         name = "Squash";
+        description = "Tanaman spesial yang dapat melakukan instant-kill.";
         cost = 50;
         health = 100;
         attack_damage = 5000;

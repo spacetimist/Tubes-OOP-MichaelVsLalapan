@@ -278,14 +278,18 @@ public class State {
                 g2.drawString(">", x-30, y);
             }
         }
+
+        else if(menuScreenState == 1) {
+            g2.setColor(Color.WHITE);
+
+        }
+
         else if(menuScreenState == 2) {
             g2.setColor(Color.WHITE);
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 14F));
             wp.plantMenu.drawList(g2);
         }
         else if(menuScreenState == 3) {
             g2.setColor(Color.WHITE);
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 14F));
             wp.zombieMenu.drawList(g2);
         }
     }

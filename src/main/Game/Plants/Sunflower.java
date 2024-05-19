@@ -8,6 +8,7 @@ public class Sunflower extends Plant {
         super(wp, kh);
         getPlantImage("src/main/Resources/Plants/sunflower.png");
         name = "Sunflower";
+        description = "Tanaman spesial yang dapat menghasilkan sun.";
         cost = 50;
         health = 100;
         attack_damage = 0;

@@ -8,6 +8,7 @@ public class Jalapeno extends Plant {
         super(wp, kh);
         getPlantImage("src/main/Resources/Plants/jalapeno.png");
         name = "Jalapeno";
+        description = "Tanaman yang akan menghabisi semua zombie yang ada di barisan tersebut.";
         cost = 125;
         health = 250;
         attack_damage = 5000;

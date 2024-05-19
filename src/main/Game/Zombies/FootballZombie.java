@@ -8,6 +8,7 @@ public class FootballZombie extends Zombie {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/football.png");
         name = "Football Zombie";
+        description = "Zombie yang memiliki speed lebih tinggi.";
         health = 375;
         attack_damage = 200;
         attack_speed = 1;

@@ -8,6 +8,7 @@ public class PoleVaultingZombie extends Zombie {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/polevaulting.png");
         name = "Pole Vaulting Zombie";
+        description = "Zombie yang memegang sebuah galah untuk melompati tanaman di depannya.";
         health = 175;
         attack_damage = 100;
         attack_speed = 1;
