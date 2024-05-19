@@ -85,8 +85,8 @@ public abstract class Zombie extends Character implements SpeedChange {
         }
     }
 
-    public void attacked(int i) {
-        
+    public void plantAttack(int i) {
+
     }
 
     public void draw(Graphics2D g2) {

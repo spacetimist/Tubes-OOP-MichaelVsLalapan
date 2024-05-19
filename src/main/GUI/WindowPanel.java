@@ -32,11 +32,12 @@ public class WindowPanel extends JPanel implements Runnable {
     public Map map = new Map(this);
     KeyHandler kh = new KeyHandler(this);
     Thread gameThread;
+    public Sun sun = new Sun(this);
 
     // instantiate collision
     public Collision collision = new Collision(this);
 
-    // instantiate plant list, zombie list
+    // instantiate plant list, zombie list (yg di map)
     public ArrayList<Plant> PlantList = new ArrayList<>();
     public ArrayList<Zombie> ZombieList = new ArrayList<>();
     // deck and inventory
@@ -178,8 +179,10 @@ public class WindowPanel extends JPanel implements Runnable {
 
         }
         if(gameState == playState || gameState == plantingState) {
-            for(Zombie z:ZombieList) {
-                z.update();
+            for(int i=0; i<Batch.length; i++) {
+                if(Batch[i] != null) {
+                    Batch[i].update();
+                }
             }
 //            while(ZombieList.size() < 10) {
 //                zSpawn.set();
@@ -208,8 +211,10 @@ public class WindowPanel extends JPanel implements Runnable {
         if(gameState == playState || gameState == plantingState) {
             map.draw(g2);
 
-            for(Zombie z:ZombieList) {
-                z.draw(g2);
+            for(int i=0; i<Batch.length; i++) {
+                if(Batch[i] != null) {
+                    Batch[i].draw(g2);
+                }
             }
             state.draw(g2);
         }

@@ -21,20 +21,19 @@ public class ZombieSpawn extends Thread {
         random = new Random();
     }
 
-    public int n = 0; // jumlah zombie yg sudah dispawn
-
     public void set() {
         // 10 zombie yang dispawn
-        int i = 0;
-        wp.ZombieList.add(generateRandomZombie());
-        for(Zombie zombie: wp.ZombieList) {
 
-            while (i < 6) { // pick lanes with 0.3 probability
+        int j;
+        int i;
+        wp.ZombieList.add(generateRandomZombie()); // Menghasilkan zombie secara acak
+        for (Zombie zombie : wp.ZombieList) {
+            j = 0;
+            i = 0;
+
+            while (i < 6) {
+                int laneIndex;
                 if (random.nextInt(3) == 0) {
-                    if (n >= 10) {
-                        System.out.println("break di sini");
-                        break;
-                    }
                     if (zombie.is_aquatic) {
                         if (i != 2 && i != 3) {
                             while (zombie.is_aquatic) {
@@ -42,8 +41,7 @@ public class ZombieSpawn extends Thread {
                             }
                         }
                         zombie.setDefaultValues(lane[i]);
-//                        zombie.update();
-//                        wp.Batch[j] = zombie;
+                        wp.Batch[j] = zombie;
                     } else {
                         if (i == 2 || i == 3) {
                             while (!zombie.is_aquatic) {
@@ -51,18 +49,24 @@ public class ZombieSpawn extends Thread {
                             }
                         }
                         zombie.setDefaultValues(lane[i]);
-//                        zombie.update();
-//                        wp.Batch[j] = zombie;
+                        wp.Batch[j] = zombie;
                     }
-                    n++;
-                    i++;
+                    j++;
+                    if (j == i) {
+                        j = 0;
+//                        this.set();
+                    }
                 }
+                i++;
                 System.out.println(i);
-                System.out.println("n: " + n);
+                System.out.println(j);
             }
+            // Memilih jalur secara acak prob 0.3
+
+
+            // spawn generated zombie into randomly picked lane
 
         }
-
     }
 
 

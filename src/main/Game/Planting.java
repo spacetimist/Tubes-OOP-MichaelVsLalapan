@@ -15,7 +15,6 @@ public class Planting {
     }
 
     public void selectTile() {
-        int sun = 100;
         for(Plant plant : wp.Deck) {
             if(plant.x == wp.state.cursorX && plant.y == wp.state.cursorY) {
 //                System.out.print(wp.Deck.size());

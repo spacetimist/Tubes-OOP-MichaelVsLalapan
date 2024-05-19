@@ -63,9 +63,13 @@ public class State {
             drawCursor(deckX, deckY);
 //            movePlant();
             drawPlant(g2);
+            drawSun();
+            playTime();
         }
         if(wp.gameState == wp.plantingState) {
             drawPlant(g2);
+            drawSun();
+            playTime();
         }
         if(wp.gameState == wp.inventoryState) {
             drawInventory();
@@ -167,6 +171,15 @@ public class State {
 
             wp.map.hasPlant[wp.xValue][wp.yValue] = true;
         }
+    }
+
+    public void drawSun() {
+        String text = String.valueOf(wp.sun.totalSun);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 25F));
+        int x = 60;
+        int y = 7*60;
+        g2.drawString(text, x, y + 40);
+        g2.drawImage(wp.sun.img, 0, y, null);
     }
 
     public void drawMenu() {
@@ -282,6 +295,15 @@ public class State {
             g2.setColor(Color.WHITE);
             wp.zombieMenu.drawListZombie(g2);
         }
+    }
+
+    public void playTime() {
+        playTime += (double) 1/60;
+        String text = "Time: " + dFormat.format(playTime);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
+        int x = 550;
+        int y = 7*60;
+        g2.drawString(text, x, y + 40);
     }
     public int centerX(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
