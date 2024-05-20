@@ -146,7 +146,6 @@ public class WindowPanel extends JPanel implements Runnable {
         gameState = menuState; // initial state
         initializeCharacters();
         inv.set();
-        zSpawn.set();
     }
     public void startGameThread() {
         gameThread = new Thread(this);
