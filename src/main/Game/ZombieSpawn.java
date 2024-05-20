@@ -64,7 +64,7 @@ public class ZombieSpawn extends Thread {
 //                System.out.println(j);
 //            }
 //        }
-        if(wp.ZombieList.size() <= 10) {
+        if(wp.ZombieList.size() <= 10 && wp.state.playTime >= 20 && wp.state.playTime <= 160) {
             int j = 0;
             for (int i = 0; i < 6; i++) {
                 // Cek apakah zombie sesuai dengan lane
