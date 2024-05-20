@@ -22,50 +22,69 @@ public class ZombieSpawn extends Thread {
     }
 
     public void set() {
-        // 10 zombie yang dispawn
+        spawnBatch();
 
-        int j;
-        int i;
-        wp.ZombieList.add(generateRandomZombie()); // Menghasilkan zombie secara acak
-        for (Zombie zombie : wp.ZombieList) {
-            j = 0;
-            i = 0;
+    }
 
-            while (i < 6) {
-                int laneIndex;
+    public void spawnBatch() {
+//        int j;
+//        int i;
+//        wp.ZombieList.add(generateRandomZombie()); // Menghasilkan zombie secara acak
+//        for (Zombie zombie : wp.ZombieList) {
+//            j = 0;
+//            i = 0;
+//
+//            while (i < 6) {
+//                if (random.nextInt(3) == 0) {
+//                    if (zombie.is_aquatic) {
+//                        if (i != 2 && i != 3) {
+//                            while (zombie.is_aquatic) {
+//                                zombie = generateRandomZombie();
+//                            }
+//                        }
+//                        zombie.setDefaultValues(lane[i]);
+//                        wp.Batch[j] = zombie;
+//                    } else {
+//                        if (i == 2 || i == 3) {
+//                            while (!zombie.is_aquatic) {
+//                                zombie = generateRandomZombie();
+//                            }
+//                        }
+//                        zombie.setDefaultValues(lane[i]);
+//                        wp.Batch[j] = zombie;
+//                    }
+//                    j++;
+//                    if (j == i) {
+//                        j = 0;
+////                        this.set();
+//                    }
+//                }
+//                i++;
+//                System.out.println(i);
+//                System.out.println(j);
+//            }
+//        }
+        if(wp.ZombieList.size() <= 10) {
+            int j = 0;
+            for (int i = 0; i < 6; i++) {
+                // Cek apakah zombie sesuai dengan lane
                 if (random.nextInt(3) == 0) {
-                    if (zombie.is_aquatic) {
-                        if (i != 2 && i != 3) {
-                            while (zombie.is_aquatic) {
-                                zombie = generateRandomZombie();
-                            }
+                    Zombie zombie = generateRandomZombie();
+                    if (!zombie.is_aquatic && (i == 2 || i == 3)) {
+                        while(!zombie.is_aquatic) {
+                            zombie = generateRandomZombie();
                         }
-                        zombie.setDefaultValues(lane[i]);
-                        wp.Batch[j] = zombie;
-                    } else {
-                        if (i == 2 || i == 3) {
-                            while (!zombie.is_aquatic) {
-                                zombie = generateRandomZombie();
-                            }
+                    } else if (zombie.is_aquatic && (i != 2 && i != 3)) {
+                        while(zombie.is_aquatic) {
+                            zombie = generateRandomZombie();
                         }
-                        zombie.setDefaultValues(lane[i]);
-                        wp.Batch[j] = zombie;
                     }
+                    zombie.setDefaultValues(lane[i]);
+                    wp.Batch[j] = zombie;
+                    wp.ZombieList.add(zombie); // Tambahkan zombie baru ke list
                     j++;
-                    if (j == i) {
-                        j = 0;
-//                        this.set();
-                    }
                 }
-                i++;
-                System.out.println(i);
-                System.out.println(j);
             }
-            // Memilih jalur secara acak prob 0.3
-
-
-            // spawn generated zombie into randomly picked lane
-
         }
     }
 
@@ -99,17 +118,14 @@ public class ZombieSpawn extends Thread {
     }
     @Override
     public void run() {
-        for(int i=0; i<wp.Batch.length; i++) {
-            if(wp.Batch[i] != null) {
-                wp.Batch[i].update();
+        while (true) {
+            spawnBatch();
+            try {
+                Thread.sleep(3000); // Menunda eksekusi selama 1000 milidetik (1 detik)
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
-//        try {
-//            Thread.sleep(1000); // Menunda eksekusi selama 1000 milidetik (1 detik)
-//        } catch (InterruptedException e) {
-//            // Tangani eksepsi jika terjadi
-//            e.printStackTrace();
-//        }
     }
 
 }

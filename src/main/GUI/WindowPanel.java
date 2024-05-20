@@ -28,7 +28,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
 
-    public int fps = 12;
+    public int fps = 6;
     public Map map = new Map(this);
     KeyHandler kh = new KeyHandler(this);
     Thread gameThread;
@@ -151,7 +151,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
-
+        zSpawn.start();
     }
 
     @Override
@@ -180,12 +180,10 @@ public class WindowPanel extends JPanel implements Runnable {
 
         }
         if(gameState == playState || gameState == plantingState) {
-            sun.startGeneratingSun();
-            for(int i=0; i<Batch.length; i++) {
-                if(Batch[i] != null) {
-                    Batch[i].update();
-                }
+            for (Zombie zombie : ZombieList) {
+                zombie.update();
             }
+            sun.startGeneratingSun();
         }else{
             sun.stopGeneratingSun();
         }
@@ -206,10 +204,9 @@ public class WindowPanel extends JPanel implements Runnable {
         if(gameState == playState || gameState == plantingState) {
             map.draw(g2);
 
-            for(int i=0; i<Batch.length; i++) {
-                if(Batch[i] != null) {
-                    Batch[i].draw(g2);
-                }
+
+            for (Zombie zombie : ZombieList) {
+                zombie.draw(g2);
             }
             state.draw(g2);
 

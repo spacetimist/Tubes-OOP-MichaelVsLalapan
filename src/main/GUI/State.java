@@ -295,7 +295,7 @@ public class State {
     }
 
     public void playTime() {
-        playTime += (double) 1/12;
+        playTime += (double) 1/wp.fps;
         String text = "Time: " + dFormat.format(playTime);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
         int x = 550;
