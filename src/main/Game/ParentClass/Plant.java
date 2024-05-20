@@ -15,11 +15,12 @@ public abstract class Plant extends Character {
     // attributes
     public int cost, range, cooldown;
 
-    public Rectangle solidArea = new Rectangle(0, 0, 60, 60);
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
         this.kh = kh;
         collision = true;
+
+        solidArea = new Rectangle(0, 0, 60, 60);
 
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;

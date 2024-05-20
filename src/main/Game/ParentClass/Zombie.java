@@ -52,6 +52,7 @@ public abstract class Zombie extends Character implements SpeedChange {
 
         int index = wp.collision.checkPlant(this, true);
         attack(index);
+        plantAttack(index);
     }
 
     public void attack(int index) {
@@ -60,7 +61,7 @@ public abstract class Zombie extends Character implements SpeedChange {
         if(index != 999) {
             Plant plant = wp.PlantList.get(index);
             while(plant != null) {
-                this.speed = 0;
+                speed = 0;
                 if(health > 0) {
                     while(plant.health > 0) {
                         plant.health -= attack_damage;
@@ -85,7 +86,8 @@ public abstract class Zombie extends Character implements SpeedChange {
         }
     }
 
-    public void plantAttack(int i) {
+    public void plantAttack(int index) {
+        this.index = index;
 
     }
 
