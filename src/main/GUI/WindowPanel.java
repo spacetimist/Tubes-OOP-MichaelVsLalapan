@@ -73,7 +73,6 @@ public class WindowPanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(kh);
         this.setFocusable(true);
-        initializeCharacters();
     }
 
     public void initializeCharacters() {
@@ -145,12 +144,14 @@ public class WindowPanel extends JPanel implements Runnable {
 
     public void setUp() {
         gameState = menuState; // initial state
+        initializeCharacters();
         inv.set();
         zSpawn.set();
     }
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+
     }
 
     @Override
@@ -179,20 +180,14 @@ public class WindowPanel extends JPanel implements Runnable {
 
         }
         if(gameState == playState || gameState == plantingState) {
+            sun.startGeneratingSun();
             for(int i=0; i<Batch.length; i++) {
                 if(Batch[i] != null) {
                     Batch[i].update();
                 }
             }
-//            while(ZombieList.size() < 10) {
-//                zSpawn.set();
-//                try {
-//                    Thread.sleep(1000); // Menunda eksekusi selama 1000 milidetik (1 detik)
-//                } catch (InterruptedException e) {
-//                    // Tangani eksepsi jika terjadi
-//                    e.printStackTrace();
-//                }
-//            }
+        }else{
+            sun.stopGeneratingSun();
         }
     }
     public State state = new State(this);
@@ -217,6 +212,7 @@ public class WindowPanel extends JPanel implements Runnable {
                 }
             }
             state.draw(g2);
+
         }
         if(gameState == plantingState) {
 

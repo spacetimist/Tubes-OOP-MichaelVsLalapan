@@ -33,12 +33,8 @@ public class State {
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
-//    public int xValue;
-//    public int yValue;
-    private boolean inputDialogShown = false;
 
-
-    double playTime;
+    public double playTime = 0;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
     public State(WindowPanel wp) {
@@ -299,7 +295,7 @@ public class State {
     }
 
     public void playTime() {
-        playTime += (double) (System.currentTimeMillis()/1000);
+        playTime += (double) 1/12;
         String text = "Time: " + dFormat.format(playTime);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
         int x = 550;
