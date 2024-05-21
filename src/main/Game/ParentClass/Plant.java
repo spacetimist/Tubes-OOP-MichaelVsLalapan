@@ -14,6 +14,7 @@ public abstract class Plant extends Character {
     KeyHandler kh;
     // attributes
     public int cost, range, cooldown;
+    public long lastPlantedTime;
 
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
@@ -24,6 +25,8 @@ public abstract class Plant extends Character {
 
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        lastPlantedTime = 0;
 
         setDefaultValues(1, 1);
     }

@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Zombie extends Character implements SpeedChange {
-    public int speed = 1;
+    public int speed;
     WindowPanel wp;
 
     // attributes
@@ -22,9 +22,10 @@ public abstract class Zombie extends Character implements SpeedChange {
         this.wp = wp;
 
         // make solid area smaller than tilesize (60*60)
-        solidArea = new Rectangle(20, 20, 48, 48);
+        solidArea = new Rectangle(20, 40, 48, 48);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        speed = 1;
         setDefaultValues(1);
     }
 
@@ -42,7 +43,9 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     int index;
     public void update() {
-        x -= speed; // gerak ke kiri
+        if (speed > 0) {
+            x -= speed; // Gerak ke kiri hanya jika speed > 0
+        }
         direction = "left";
         collision = false;
 
@@ -51,7 +54,10 @@ public abstract class Zombie extends Character implements SpeedChange {
         }
 
         int index = wp.collision.checkPlant(this, true);
-        attack(index);
+        if(index != 999) {
+            speed = 0;
+            attack(index);
+        }
         plantAttack(index);
     }
 
@@ -61,7 +67,6 @@ public abstract class Zombie extends Character implements SpeedChange {
         if(index != 999) {
             Plant plant = wp.PlantList.get(index);
             while(plant != null) {
-                speed = 0;
                 if(health > 0) {
                     while(plant.health > 0) {
                         plant.health -= attack_damage;
@@ -98,7 +103,7 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     @Override
     public void speedDecrease() {
-        wp.fps--;
+        ;
     }
 
     @Override
