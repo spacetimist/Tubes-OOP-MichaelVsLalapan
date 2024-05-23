@@ -73,7 +73,7 @@ public abstract class Plant extends Character {
                         }
                     }
                 } else if (range == 1) {
-                    if (z.x == this.x && z.y+30 == this.y) {
+                    if (z.x == this.x+60 && z.y+30 == this.y) {
                         // Remove zombie when it is in the tile just before the plant
                         wp.ZombieList.remove(z);
                         System.out.printf("%s was instantly killed by %s\n", z.name, this.name);
@@ -83,50 +83,4 @@ public abstract class Plant extends Character {
             }
         }
     }
-
-//    public void update() {
-//        attack();
-//    }
-//
-//    public void attack() {
-//        for(Zombie z: wp.ZombieList) {
-//            while(health > 0) {
-//                if(range == -1) {
-//                    if(z.y+30 == y) {
-//                        while(z.health > 0) {
-//                            z.health -= attack_damage;
-//                            try {
-//                                Thread.sleep(attack_speed*1000);
-//                            } catch (InterruptedException e) {
-//                                throw new RuntimeException(e);
-//                            }
-//                            System.out.printf("%s's health: %d\n", z.name, z.health);
-//
-//                        }
-//                        if(z.health <= 0) {
-//                            wp.ZombieList.remove(z);
-//                        }
-//                    }
-//                }else if(range == 1) {
-//                    int index = wp.collision.checkPlant(z, false);
-//                    if(index != 999) {
-//                        while(z.health > 0) {
-//                            z.health -= attack_damage;
-//                            try {
-//                                Thread.sleep(attack_speed*1000);
-//                            } catch (InterruptedException e) {
-//                                throw new RuntimeException(e);
-//                            }
-//                            System.out.printf("%s's health: %d\n", z.name, z.health);
-//
-//                        }
-//                        if(z.health <= 0) {
-//                            wp.ZombieList.remove(z);
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
 }
