@@ -50,7 +50,7 @@ public abstract class Zombie extends Character implements SpeedChange {
         direction = "left";
         collision = false;
 
-        if (x == 30 || collision) {
+        if (x == 30) {
             speed = 0;
         }
 
