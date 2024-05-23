@@ -224,4 +224,7 @@ public class WindowPanel extends JPanel implements Runnable {
 
         g2.dispose();
     }
+
+    public void setVerticalScrollBarPolicy(int verticalScrollbarAlways) {
+    }
 }

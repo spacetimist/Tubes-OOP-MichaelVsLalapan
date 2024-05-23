@@ -6,9 +6,12 @@ import main.Game.ParentClass.Plant;
 import main.Game.ParentClass.Zombie;
 
 import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 import java.util.List;
 
-public class Menu<T extends Character> {
+public class Menu<T extends Character>{
     private List<T> characterList;
     WindowPanel wp;
     Graphics2D g2;
@@ -24,10 +27,19 @@ public class Menu<T extends Character> {
         int x = centerX(text);
         int y = 30;
         g2.drawString(text, x, y);
-        y += 30;
+        y += 40;
+
         for (T character : characterList) {
             Plant plant = (Plant) character;
-            x = 50;
+            x = 80;
+            int boxWidth = 500;
+            int boxHeight = 180;
+
+            g2.setColor(Color.LIGHT_GRAY);
+            g2.fillRect(x - 10, y - 30, boxWidth, boxHeight);
+            g2.setColor(Color.BLACK);
+            g2.drawRect(x - 10, y - 30, boxWidth, boxHeight);
+
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
             g2.drawString(character.name, x, y);
             y += 20;
@@ -56,10 +68,19 @@ public class Menu<T extends Character> {
         int x = centerX(text);
         int y = 30;
         g2.drawString(text, x, y);
-        y += 30;
+        y += 40;
+
         for (T character : characterList) {
             Zombie zombie = (Zombie) character;
-            x = 50;
+            x = 80;
+            int boxWidth = 500;
+            int boxHeight = 180;
+
+            g2.setColor(Color.LIGHT_GRAY);
+            g2.fillRect(x - 10, y - 30, boxWidth, boxHeight);
+            g2.setColor(Color.BLACK);
+            g2.drawRect(x - 10, y - 30, boxWidth, boxHeight);
+
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
             g2.drawString(character.name, x, y);
             y += 20;
