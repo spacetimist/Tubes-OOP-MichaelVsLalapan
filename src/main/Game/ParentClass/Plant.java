@@ -15,6 +15,9 @@ public abstract class Plant extends Character {
     // attributes
     public int cost, range, cooldown;
     public long lastPlantedTime;
+    public Rectangle attackArea;
+    public int attackAreaDefaultX, attackAreaDefaultY;
+    public long lastAttackTime;
 
     public Plant(WindowPanel wp, KeyHandler kh) {
         this.wp = wp;
@@ -27,6 +30,8 @@ public abstract class Plant extends Character {
         solidAreaDefaultY = solidArea.y;
 
         lastPlantedTime = 0;
+
+
 
         setDefaultValues(1, 1);
     }
@@ -46,4 +51,82 @@ public abstract class Plant extends Character {
         BufferedImage image = img;
         g2.drawImage(image, x, y, null);
     }
+
+    public void update() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastAttackTime >= attack_speed*1000) {
+            attack();
+            lastAttackTime = currentTime;
+        }
+    }
+
+    public void attack() {
+        for (Zombie z : wp.ZombieList) {
+            if (health > 0) {
+                if (range == -1) {
+                    if (z.y + 30 == y) {
+                        z.health -= attack_damage;
+                        System.out.printf("%s's health: %d\n", z.name, z.health);
+                        if (z.health <= 0) {
+                            wp.ZombieList.remove(z);
+                            break;
+                        }
+                    }
+                } else if (range == 1) {
+                    if (z.x == this.x && z.y+30 == this.y) {
+                        // Remove zombie when it is in the tile just before the plant
+                        wp.ZombieList.remove(z);
+                        System.out.printf("%s was instantly killed by %s\n", z.name, this.name);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+//    public void update() {
+//        attack();
+//    }
+//
+//    public void attack() {
+//        for(Zombie z: wp.ZombieList) {
+//            while(health > 0) {
+//                if(range == -1) {
+//                    if(z.y+30 == y) {
+//                        while(z.health > 0) {
+//                            z.health -= attack_damage;
+//                            try {
+//                                Thread.sleep(attack_speed*1000);
+//                            } catch (InterruptedException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//                            System.out.printf("%s's health: %d\n", z.name, z.health);
+//
+//                        }
+//                        if(z.health <= 0) {
+//                            wp.ZombieList.remove(z);
+//                        }
+//                    }
+//                }else if(range == 1) {
+//                    int index = wp.collision.checkPlant(z, false);
+//                    if(index != 999) {
+//                        while(z.health > 0) {
+//                            z.health -= attack_damage;
+//                            try {
+//                                Thread.sleep(attack_speed*1000);
+//                            } catch (InterruptedException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//                            System.out.printf("%s's health: %d\n", z.name, z.health);
+//
+//                        }
+//                        if(z.health <= 0) {
+//                            wp.ZombieList.remove(z);
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

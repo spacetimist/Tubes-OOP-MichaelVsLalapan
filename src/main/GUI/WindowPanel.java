@@ -182,6 +182,9 @@ public class WindowPanel extends JPanel implements Runnable {
             for (Zombie zombie : ZombieList) {
                 zombie.update();
             }
+            for (Plant  plant : PlantList) {
+                plant.update();
+            }
             sun.startGeneratingSun();
         }else{
             sun.stopGeneratingSun();

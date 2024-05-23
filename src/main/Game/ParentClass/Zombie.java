@@ -12,11 +12,13 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Zombie extends Character implements SpeedChange {
-    public int speed;
+    public double speed = 1;
+    public double originalSpeed;
     WindowPanel wp;
 
     // attributes
     public boolean is_aquatic = false;
+    public long lastAttackTime;
 
     public Zombie(WindowPanel wp) {
         this.wp = wp;
@@ -25,7 +27,6 @@ public abstract class Zombie extends Character implements SpeedChange {
         solidArea = new Rectangle(20, 40, 48, 48);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        speed = 1;
         setDefaultValues(1);
     }
 
@@ -41,59 +42,41 @@ public abstract class Zombie extends Character implements SpeedChange {
         }
     }
 
-    int index;
+    int index, rangeIndex;
     public void update() {
         if (speed > 0) {
-            x -= speed; // Gerak ke kiri hanya jika speed > 0
+            x -= speed; // Move left only if speed > 0
         }
         direction = "left";
         collision = false;
 
-        if (x == 30) {
+        if (x == 30 || collision) {
             speed = 0;
         }
 
+        long currentTime = System.currentTimeMillis();
         int index = wp.collision.checkPlant(this, true);
-        if(index != 999) {
-            speed = 0;
+        if (index != 999 && currentTime - lastAttackTime >= attack_speed * 1000) {
+            if (speed > 0) {
+                originalSpeed = speed; // Save current speed
+                speed = 0; // Stop the zombie
+            }
             attack(index);
+            lastAttackTime = currentTime;
+        }else if (index == 999 && speed == 0) {
+            speed = originalSpeed; // Resume movement if no plant to attack
         }
-        plantAttack(index);
     }
 
     public void attack(int index) {
-        this.index = index;
-        index = wp.collision.checkPlant(this, true);
-        if(index != 999) {
-            Plant plant = wp.PlantList.get(index);
-            while(plant != null) {
-                if(health > 0) {
-                    while(plant.health > 0) {
-                        plant.health -= attack_damage;
-                        try {
-                            Thread.sleep(attack_speed*1000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        System.out.printf("%s's health: %d\n", plant.name, plant.health);
-                    }
-                    if(plant.health <= 0) {
-                        wp.PlantList.remove(index);
-                        break;
-                    }
-                }else{
-                    wp.ZombieList.remove(this);
-                }
-
+        Plant plant = wp.PlantList.get(index);
+        if (plant != null && health > 0) {
+            plant.health -= attack_damage;
+            System.out.printf("%s's health: %d\n", plant.name, plant.health);
+            if (plant.health <= 0) {
+                wp.PlantList.remove(index);
             }
-            this.speed = 1;
-
         }
-    }
-
-    public void plantAttack(int index) {
-        this.index = index;
-
     }
 
     public void draw(Graphics2D g2) {
@@ -103,11 +86,11 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     @Override
     public void speedDecrease() {
-        ;
+
     }
 
     @Override
     public void speedIncrease() {
-        wp.fps++;
+        speed = 2;
     }
 }

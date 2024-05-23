@@ -24,6 +24,7 @@ public class Collision {
                 c.solidArea.x -= c.speed; // gerak ke kiri
                 if(c.solidArea.intersects(plant.solidArea)) {
                     index = i;
+                    c.collision = true;
                     break;
                 }
                 c.solidArea.x = c.solidAreaDefaultX;
@@ -34,7 +35,8 @@ public class Collision {
             }
         }
 
-    return index;
+        return index;
     }
+
 }
 

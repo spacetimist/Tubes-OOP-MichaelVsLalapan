@@ -12,5 +12,6 @@ public class FootballZombie extends Zombie {
         health = 375;
         attack_damage = 200;
         attack_speed = 1;
+        speed = 2;
     }
 }
