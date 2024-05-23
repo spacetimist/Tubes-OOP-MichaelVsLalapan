@@ -1,23 +1,16 @@
 package main.GUI;
 
-import main.Game.Map.Map;
-import main.Game.ParentClass.*;
-import main.Game.ParentClass.Zombie;
-import main.Game.Plants.Cactus;
-import main.Game.Menu;
 
-import javax.swing.*;
+import main.Game.ParentClass.*;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.text.DecimalFormat;
 
 public class State {
     WindowPanel wp;
     public int cursorY;
     public int cursorX;
-    public int plantX;
-    public int plantY;
     public int Col = 0;
     public int Row = 0 ;
     public int inventoryX;
@@ -28,11 +21,10 @@ public class State {
     public int command = 0;
     public int menuScreenState = 0;
     Font f1, f2;
-    public boolean messageOn = false;
     Graphics2D g2;
-    public String message = "";
     int messageCounter = 0;
-    public boolean gameFinished = false;
+    public boolean win = false;
+    public boolean lose = false;
 
     public double playTime = 0;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
@@ -43,27 +35,28 @@ public class State {
         f2 = new Font(Font.SANS_SERIF, Font.PLAIN, 80);
     }
 
-    public void showMessage(String text) {
-        message = text;
-        messageOn = true;
-    }
-
     public void draw(Graphics2D g2) {
         this.g2 = g2;
         g2.setFont(f1);
         g2.setColor(Color.WHITE);
 
-        if(gameFinished) {
-            String text;
+        if(wp.gameState == wp.finished) {
+            String text = "";
             int textLength, x, y;
             g2.setFont(f2);
             g2.setColor(Color.YELLOW);
-            text = "You Won!";
+            if(win) {
+                text = "You Win!";
+            }
+            if(lose) {
+                text = "You Lose...";
+            }
             textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
             x = wp.screenWidth/2 - textLength/2;
             y = wp.screenWidth/2 - (wp.tileSize*3);
+            drawPlant(g2);
+            playTime();
             g2.drawString(text, x, y);
-
         }
 
         if(wp.gameState == wp.playState) {
@@ -75,11 +68,13 @@ public class State {
             drawPlant(g2);
             drawSun();
             playTime();
+            exitCondition();
         }
         if(wp.gameState == wp.plantingState) {
             drawPlant(g2);
             drawSun();
             playTime();
+            exitCondition();
         }
         if(wp.gameState == wp.inventoryState) {
             drawInventory();
@@ -308,12 +303,16 @@ public class State {
     }
 
     public void playTime() {
-        playTime += (double) 1/wp.fps;
-        String text = "Time: " + dFormat.format(playTime);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
-        int x = 550;
-        int y = 7*60;
-        g2.drawString(text, x, y + 40);
+        if(wp.gameState == wp.finished) {
+            playTime += 0;
+        }else {
+            playTime += (double) 1/wp.fps;
+            String text = "Time: " + dFormat.format(playTime);
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
+            int x = 550;
+            int y = 7*60;
+            g2.drawString(text, x, y + 40);
+        }
     }
     public int centerX(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
@@ -322,8 +321,9 @@ public class State {
     }
 
     public void exitCondition() {
-        if(wp.ZombieList.size() == 0 && playTime <= 200) {
-            gameFinished = true;
+        if(wp.ZombieList.size() == 0 && playTime <= 200 && playTime > 160) {
+            win = true;
+            wp.gameState = wp.finished;
         }
     }
 

@@ -128,6 +128,11 @@ public class KeyHandler implements KeyListener {
                 wp.gameState = wp.playState;
             }
         }
+        if(wp.gameState == wp.finished) {
+            if(code == KeyEvent.VK_ENTER) {
+                System.exit(0);
+            }
+        }
     }
 
     @Override

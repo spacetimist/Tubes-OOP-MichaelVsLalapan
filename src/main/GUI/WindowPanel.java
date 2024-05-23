@@ -58,6 +58,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int deckState = 3;
     public final int plantingState = 4;
     public final int menuState = 5;
+    public final int finished = 6;
 
     //LIST OF ALL CHARACTERS
     public List<Plant> plantList = new ArrayList<>();
@@ -213,8 +214,12 @@ public class WindowPanel extends JPanel implements Runnable {
             state.draw(g2);
 
         }
-        if(gameState == plantingState) {
-
+        if(gameState == finished) {
+            map.draw(g2);
+            for (Zombie zombie : ZombieList) {
+                zombie.draw(g2);
+            }
+            state.draw(g2);
         }
 
         g2.dispose();

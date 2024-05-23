@@ -49,8 +49,9 @@ public abstract class Zombie extends Character implements SpeedChange {
         }
         collision = false;
 
-        if (x == 30 || collision) {
-            speed = 0;
+        if (x == 30) {
+            wp.state.lose = true;
+            wp.gameState = wp.finished;
         }
 
         long currentTime = System.currentTimeMillis();
