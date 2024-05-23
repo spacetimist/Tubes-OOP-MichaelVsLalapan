@@ -47,10 +47,9 @@ public abstract class Zombie extends Character implements SpeedChange {
         if (speed > 0) {
             x -= speed; // Move left only if speed > 0
         }
-        direction = "left";
         collision = false;
 
-        if (x == 30) {
+        if (x == 30 || collision) {
             speed = 0;
         }
 
@@ -75,6 +74,7 @@ public abstract class Zombie extends Character implements SpeedChange {
             System.out.printf("%s's health: %d\n", plant.name, plant.health);
             if (plant.health <= 0) {
                 wp.PlantList.remove(index);
+                wp.map.hasPlant[wp.xValue][wp.yValue] = false;
             }
         }
     }
