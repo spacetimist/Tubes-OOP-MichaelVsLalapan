@@ -27,7 +27,7 @@ public class State {
 
     public int command = 0;
     public int menuScreenState = 0;
-    Font f1;
+    Font f1, f2;
     public boolean messageOn = false;
     Graphics2D g2;
     public String message = "";
@@ -40,6 +40,7 @@ public class State {
     public State(WindowPanel wp) {
         this.wp = wp;
         f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 40);
+        f2 = new Font(Font.SANS_SERIF, Font.PLAIN, 80);
     }
 
     public void showMessage(String text) {
@@ -51,6 +52,19 @@ public class State {
         this.g2 = g2;
         g2.setFont(f1);
         g2.setColor(Color.WHITE);
+
+        if(gameFinished) {
+            String text;
+            int textLength, x, y;
+            g2.setFont(f2);
+            g2.setColor(Color.YELLOW);
+            text = "You Won!";
+            textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            x = wp.screenWidth/2 - textLength/2;
+            y = wp.screenWidth/2 - (wp.tileSize*3);
+            g2.drawString(text, x, y);
+
+        }
 
         if(wp.gameState == wp.playState) {
             drawDeck();
@@ -165,7 +179,6 @@ public class State {
 
             plant.draw(g2);
 
-            wp.map.hasPlant[wp.xValue][wp.yValue] = true;
         }
     }
 
@@ -306,6 +319,12 @@ public class State {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = wp.screenWidth/2 - length/2;
         return x;
+    }
+
+    public void exitCondition() {
+        if(wp.ZombieList.size() == 0 && playTime <= 200) {
+            gameFinished = true;
+        }
     }
 
     // Getter untuk mendapatkan nilai x dan y

@@ -23,10 +23,12 @@ public class Sunflower extends Plant {
     public void update() {
         long currentTime = System.currentTimeMillis();
 
-        if (currentTime - lastSunGenerationTime >= 3000) { // 3000 milliseconds = 3 seconds
-            wp.sun.totalSun += 25; // Generate sun points
-            lastSunGenerationTime = currentTime; // Update the last generation time
-            System.out.println("Sunflower generated 25 sun points.");
+        if(wp.state.playTime <= 100) {
+            if (currentTime - lastSunGenerationTime >= 3000) { // 3000 milliseconds = 3 seconds
+                wp.sun.totalSun += 25; // Generate sun points
+                lastSunGenerationTime = currentTime; // Update the last generation time
+                System.out.println("Sunflower generated 25 sun.");
+            }
         }
     }
 }

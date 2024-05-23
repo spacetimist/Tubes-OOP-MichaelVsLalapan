@@ -51,33 +51,40 @@ public class Planting {
                             JOptionPane.showMessageDialog(dialog, "Not enough sun! " + plant.name + " costs " + plant.cost);
                         } else {
                             Plant newPlant = createNewPlantInstance(plant);
-
                             if (newPlant != null) {
+                                boolean planted = false;
                                 if (isPool) {
                                     if (newPlant instanceof Lilypad) {
                                         if (!tileHasLilypad) {
                                             plantInTile(newPlant, currentTime);
                                             wp.map.hasLilypad[wp.xValue][wp.yValue] = true;
+//                                            planted = true;
                                         } else {
                                             JOptionPane.showMessageDialog(dialog, "There's already a Lilypad here.");
                                         }
-                                    } else if (tileHasLilypad) {
+                                    } else if (tileHasLilypad && !tileHasPlant) {
                                         plantInTile(newPlant, currentTime);
-                                        wp.map.hasPlant[wp.xValue][wp.yValue] = true;
-                                    } else {
+                                        planted = true;
+                                    } else if (!tileHasLilypad) {
                                         JOptionPane.showMessageDialog(dialog, "You have to put a Lilypad first.");
+                                    } else if (tileHasLilypad && tileHasPlant) {
+                                        JOptionPane.showMessageDialog(dialog, "This area already has a plant.");
                                     }
                                 } else {
+                                    System.out.println(tileHasPlant);
                                     if (newPlant instanceof Lilypad) {
                                         JOptionPane.showMessageDialog(dialog, "Lilypad can only be planted in the pool area.");
                                     } else if (!tileHasPlant) {
                                         plantInTile(newPlant, currentTime);
-                                        wp.map.hasPlant[wp.xValue][wp.yValue] = true;
+                                        planted = true;
                                     } else {
                                         JOptionPane.showMessageDialog(dialog, "This area already has a plant.");
                                     }
                                 }
-                                plant.lastPlantedTime = currentTime; // Update the cooldown time for the plant type in the deck
+                                if(planted) {
+                                    plant.lastPlantedTime = currentTime; // Update the cooldown time for the plant type in the deck
+                                    wp.map.hasPlant[wp.xValue][wp.yValue] = true;
+                                }
                             }
                             break;
                         }

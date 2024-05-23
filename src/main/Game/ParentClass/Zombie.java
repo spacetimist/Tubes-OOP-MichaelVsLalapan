@@ -73,8 +73,8 @@ public abstract class Zombie extends Character implements SpeedChange {
             plant.health -= attack_damage;
             System.out.printf("%s's health: %d\n", plant.name, plant.health);
             if (plant.health <= 0) {
+                wp.map.hasPlant[plant.x/60][plant.y/60] = false;
                 wp.PlantList.remove(index);
-                wp.map.hasPlant[wp.xValue][wp.yValue] = false;
             }
         }
     }
