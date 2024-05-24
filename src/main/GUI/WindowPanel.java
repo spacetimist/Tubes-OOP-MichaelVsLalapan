@@ -142,6 +142,50 @@ public class WindowPanel extends JPanel implements Runnable {
 
     }
 
+    public void swapPositionInputDialog() {
+        JDialog dialog = new JDialog((Frame) null, "Swap Position", true);
+        dialog.setSize(300, 200);
+        dialog.setLayout(null);
+
+        JLabel indexLabel1 = new JLabel("Enter index 1:");
+        indexLabel1.setBounds(20, 20, 100, 25);
+        dialog.add(indexLabel1);
+
+        JTextField indexField1 = new JTextField();
+        indexField1.setBounds(150, 20, 50, 25);
+        dialog.add(indexField1);
+
+        JLabel indexLabel2 = new JLabel("Enter index 2:");
+        indexLabel2.setBounds(20, 60, 100, 25);
+        dialog.add(indexLabel2);
+
+        JTextField indexField2 = new JTextField();
+        indexField2.setBounds(150, 60, 50, 25);
+        dialog.add(indexField2);
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setBounds(100, 100, 80, 25);
+        dialog.add(submitButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int index1 = Integer.parseInt(indexField1.getText());
+                    int index2 = Integer.parseInt(indexField2.getText());
+                    System.out.println("Swap index " + index1 + " with " + index2);  // Cetak indeks ke konsol
+                    inv.swapPosition(index1, index2); // Panggil metode untuk menukar posisi
+                    dialog.dispose();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(dialog, "Please enter valid indexes.");
+                }
+            }
+        });
+
+        dialog.setVisible(true);
+    }
+
+
     public void setUp() {
         gameState = menuState; // initial state
         initializeCharacters();
