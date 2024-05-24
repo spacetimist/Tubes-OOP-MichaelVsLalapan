@@ -4,6 +4,7 @@ import main.GUI.KeyHandler;
 import main.GUI.WindowPanel;
 import main.Game.Plants.SnowPea;
 import main.Game.Zombies.BalloonZombie;
+import main.Game.Zombies.NewspaperZombie;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -74,11 +75,15 @@ public abstract class Plant extends Character {
                             if (this instanceof SnowPea) {
                                 z.speedDecrease();
                             }
+                            if(z instanceof NewspaperZombie && z.health <= 185) {
+                                ((NewspaperZombie) z).loseNewspaper();
+                            }
                             if (z.health <= 0) {
                                 wp.ZombieList.remove(z);
                                 break;
                             }
                         }
+
                     }
                 } else if (range == 1) {
                     if (z.x == this.x + 60 && z.y + 30 == this.y) {

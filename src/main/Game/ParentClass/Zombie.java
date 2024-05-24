@@ -3,10 +3,7 @@ package main.Game.ParentClass;
 import main.GUI.WindowPanel;
 import main.Game.Interface.SpeedChange;
 import main.Game.Plants.Cactus;
-import main.Game.Zombies.BalloonZombie;
-import main.Game.Zombies.DolphinRiderZombie;
-import main.Game.Zombies.NewspaperZombie;
-import main.Game.Zombies.PoleVaultingZombie;
+import main.Game.Zombies.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -25,6 +22,7 @@ public abstract class Zombie extends Character implements SpeedChange {
     private long lastSnowPeaHitTime;
     private boolean hasJumped;
     public boolean balloonPopped;
+    public boolean newspaperLost = false;
 
     public Zombie(WindowPanel wp) {
         this.wp = wp;
@@ -95,11 +93,11 @@ public abstract class Zombie extends Character implements SpeedChange {
                         return;
                     }
                 }
-                if (this instanceof NewspaperZombie) {
-                    if (health <= 185 && !((NewspaperZombie)this).newspaperLost) { // Tambahkan pengecekan untuk status koran
-                        ((NewspaperZombie) this).loseNewspaper();
-                        System.out.printf("%s is now angry\n", this.name);
-                    }
+                System.out.println(this instanceof NewspaperZombie);
+                if (this instanceof NewspaperZombie && !newspaperLost) {
+                    System.out.println(health );
+                    ((NewspaperZombie) this).loseNewspaper();
+                    System.out.printf("%s is now angry\n", this.name);
                 }
 
                 plant.health -= attack_damage;
@@ -121,7 +119,11 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     @Override
     public void speedDecrease() {
-        this.speed /= 2;
+        if(this instanceof FootballZombie) {
+            speed = 2;
+        }else{
+            speed = 1;
+        }
 
         // if hit by snowpea
         lastSnowPeaHitTime = System.currentTimeMillis();
@@ -132,7 +134,7 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     @Override
     public void speedIncrease() {
-        speed *= 2;
+        speed = 4;
     }
 
     public void resetSpeed() {
