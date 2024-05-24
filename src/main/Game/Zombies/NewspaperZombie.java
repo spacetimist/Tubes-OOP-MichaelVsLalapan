@@ -4,7 +4,7 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Zombie;
 
 public class NewspaperZombie extends Zombie {
-    private boolean hasNewspaper = true;
+    public boolean newspaperLost = false;
     public NewspaperZombie(WindowPanel wp) {
         super(wp);
         getZombieImage("src/main/Resources/Zombies/newspaper.png");
@@ -13,14 +13,13 @@ public class NewspaperZombie extends Zombie {
         health = 375;
         attack_damage = 200;
         attack_speed = 1;
-        if(health <= 185) {
-            loseNewspaper();
-        }
     }
 
     public void loseNewspaper(){
-        hasNewspaper = false;
-        speedIncrease();
-        getZombieImage("src/main/Resources/Zombies/nonewspaper.png");
+        if (!newspaperLost) { // Pastikan metode ini hanya dipanggil sekali
+            speedIncrease();
+            getZombieImage("src/main/Resources/Zombies/nonewspaper.png");
+            newspaperLost = true; // Update status koran
+        }
     }
 }

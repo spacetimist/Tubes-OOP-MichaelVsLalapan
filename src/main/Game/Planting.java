@@ -10,7 +10,6 @@ import java.awt.*;
 
 public class Planting {
     WindowPanel wp;
-    KeyHandler kh;
     JDialog dialog = new JDialog((Frame) null, "Invalid Input", true);
     public Planting(WindowPanel wp) {
         this.wp = wp;

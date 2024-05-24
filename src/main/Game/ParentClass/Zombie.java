@@ -5,6 +5,7 @@ import main.Game.Interface.SpeedChange;
 import main.Game.Plants.Cactus;
 import main.Game.Zombies.BalloonZombie;
 import main.Game.Zombies.DolphinRiderZombie;
+import main.Game.Zombies.NewspaperZombie;
 import main.Game.Zombies.PoleVaultingZombie;
 
 import javax.imageio.ImageIO;
@@ -92,6 +93,12 @@ public abstract class Zombie extends Character implements SpeedChange {
                     } else {
                         // Skip attacking if BalloonZombie and balloon hasn't popped
                         return;
+                    }
+                }
+                if (this instanceof NewspaperZombie) {
+                    if (health <= 185 && !((NewspaperZombie)this).newspaperLost) { // Tambahkan pengecekan untuk status koran
+                        ((NewspaperZombie) this).loseNewspaper();
+                        System.out.printf("%s is now angry\n", this.name);
                     }
                 }
 

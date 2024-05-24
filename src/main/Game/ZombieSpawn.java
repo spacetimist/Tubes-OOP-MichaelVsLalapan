@@ -1,15 +1,10 @@
 package main.Game;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Random;
-
 import main.GUI.WindowPanel;
 import main.Game.ParentClass.Zombie;
 import main.Game.Zombies.*;
 
-import javax.swing.*;
+import java.util.Random;
 
 public class ZombieSpawn extends Thread {
     WindowPanel wp;
