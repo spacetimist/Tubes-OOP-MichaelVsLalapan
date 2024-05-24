@@ -23,5 +23,5 @@ Program Michael vs. Lalapan dapat dijalankan dengan cara sebagai berikut.
 3. Setelah itu, klik `run` pada `main` file.
 
 ## Buklet Michael vs. Lalapan
-Petunjuk permainan dan penjelasan lengkapnya dapat di akses pada link di bawah ini.
-
+Petunjuk permainan dan penjelasan lengkapnya dapat di akses pada link ini. 
+bit.ly/MichaelVSLalapanZOMB12
