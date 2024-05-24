@@ -113,7 +113,7 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     @Override
     public void speedDecrease() {
-        speed = 1;
+        speed /= 2;
 
         // if hit by snowpea
         lastSnowPeaHitTime = System.currentTimeMillis();

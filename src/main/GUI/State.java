@@ -326,7 +326,7 @@ public class State {
     }
 
     public void exitCondition() {
-        if(wp.ZombieList.size() == 0 && playTime <= 200 && playTime > 160) {
+        if(wp.ZombieList.size() == 0 && !wp.isMorning) {
             win = true;
             wp.gameState = wp.finished;
         }

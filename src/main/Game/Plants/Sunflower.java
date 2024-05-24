@@ -23,7 +23,7 @@ public class Sunflower extends Plant {
     public void update() {
         long currentTime = System.currentTimeMillis();
 
-        if(wp.state.playTime <= 100) {
+        if(wp.isMorning) {
             if (currentTime - lastSunGenerationTime >= 3000) { // 3000 milliseconds = 3 seconds
                 wp.sun.totalSun += 25; // Generate sun points
                 lastSunGenerationTime = currentTime; // Update the last generation time

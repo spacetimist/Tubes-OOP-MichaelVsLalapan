@@ -2,7 +2,6 @@ package main.Game.ParentClass;
 
 import main.GUI.KeyHandler;
 import main.GUI.WindowPanel;
-import main.Game.Plants.Cactus;
 import main.Game.Plants.SnowPea;
 import main.Game.Zombies.BalloonZombie;
 
@@ -18,8 +17,6 @@ public abstract class Plant extends Character {
     // attributes
     public int cost, range, cooldown;
     public long lastPlantedTime;
-    public Rectangle attackArea;
-    public int attackAreaDefaultX, attackAreaDefaultY;
     public long lastAttackTime;
 
     public Plant(WindowPanel wp, KeyHandler kh) {

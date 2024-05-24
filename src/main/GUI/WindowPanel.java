@@ -28,10 +28,12 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow;
 
     public int fps = 3;
+    public State state = new State(this);
     public Map map = new Map(this);
     KeyHandler kh = new KeyHandler(this);
     Thread gameThread;
     public Sun sun = new Sun(this);
+    public boolean isMorning;
 
     // instantiate collision
     public Collision collision = new Collision(this);
@@ -220,12 +222,11 @@ public class WindowPanel extends JPanel implements Runnable {
     }
     public void update() {
         if(gameState == playState || gameState == plantingState) {
+            isMorning = (state.playTime % 200) <= 100;
+            map.setTiles(isMorning);
             for (Zombie zombie : ZombieList) {
                 zombie.update();
             }
-//            for (Zombie zombie : ZombieList) {
-//                // if hit by snowpea
-//            }
             for (Plant  plant : PlantList) {
                 plant.update();
             }
@@ -234,7 +235,6 @@ public class WindowPanel extends JPanel implements Runnable {
             sun.stopGeneratingSun();
         }
     }
-    public State state = new State(this);
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
