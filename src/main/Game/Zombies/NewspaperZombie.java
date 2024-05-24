@@ -18,6 +18,7 @@ public class NewspaperZombie extends Zombie {
         if (!newspaperLost) { // Pastikan metode ini hanya dipanggil sekali
             speedIncrease();
             getZombieImage("src/main/Resources/Zombies/nonewspaper.png");
+            System.out.printf("%s is now angry\n", this.name);
             newspaperLost = true; // Update status koran
         }
     }

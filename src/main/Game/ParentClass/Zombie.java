@@ -93,12 +93,6 @@ public abstract class Zombie extends Character implements SpeedChange {
                         return;
                     }
                 }
-                System.out.println(this instanceof NewspaperZombie);
-                if (this instanceof NewspaperZombie && !newspaperLost) {
-                    System.out.println(health );
-                    ((NewspaperZombie) this).loseNewspaper();
-                    System.out.printf("%s is now angry\n", this.name);
-                }
 
                 plant.health -= attack_damage;
                 System.out.printf("%s's health: %d\n", plant.name, plant.health);
