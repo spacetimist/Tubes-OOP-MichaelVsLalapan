@@ -246,11 +246,11 @@ public class State {
             g2.setColor(Color.WHITE);
             String text = "HELP";
             int x = centerX(text);
-            int y = 60;
+            int y = 40;
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
             g2.drawString(text, x, y);
             x = 110;
-            y += 40;
+            y += 30;
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
             g2.setColor(Color.YELLOW);
             g2.drawString("Roro Jonggrang diserang oleh pasukan jin yang menjadi zombie.", x, y);
@@ -266,35 +266,43 @@ public class State {
             g2.drawString("Bantulah Bandung Bondowoso untuk menyusun strategi!!", x, y);
 
             g2.setColor(Color.WHITE);
-            x = 260;
+            x = 250;
             y += 40;
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
             g2.drawString("Aturan permainan", x, y);
             x = 80;
             y += 20;
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
             g2.drawString("1. Start game", x, y);
             y += 20;
             g2.drawString("2. Pilih dan masukkan tanaman dari inventory ke deck", x, y);
             y += 20;
-            g2.drawString("3. Press 's' dan permainan dimulai", x, y);
+            g2.drawString("3. Deck harus terisi penuh dengan 6 plant", x, y);
             y += 20;
-            g2.drawString("4. Tanam tanaman yang ada di deck ke dalam map", x, y);
+            g2.drawString("4. Press 'S' dan permainan dimulai", x, y);
             y += 20;
-            g2.drawString("5. Terus menanam hingga zombie mati dan permainan selesai", x, y);
+            g2.drawString("5. Tanam tanaman yang ada di deck ke dalam map dengan cara 'ENTER'", x, y);
+            y += 20;
+            g2.drawString("6. Terus menanam hingga zombie mati dan permainan selesai", x, y);
 
             x = 280;
             y += 40;
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15F));
             g2.drawString("Command", x, y);
             x = 80;
             y += 20;
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15F));
             g2.drawString("1. 'ESC' untuk keluar dari menu help, plants list dan zombies list", x, y);
             y += 20;
-            g2.drawString("2. 'i' untuk pindah dari deck ke inventory", x, y);
+            g2.drawString("2. 'I' untuk pindah dari deck ke inventory", x, y);
             y += 20;
-            g2.drawString("3. 'd' untuk pindah dari inventory ke deck", x, y);
+            g2.drawString("3. 'D' untuk pindah dari inventory ke deck", x, y);
             y += 20;
             g2.drawString("4. 'SPACE' untuk memilih tanaman dari inventory", x, y);
             y += 20;
-            g2.drawString("5. 'ENTER' untuk mengembalikan tanaman ke inventory dan menanam tanaman", x, y);
+            g2.drawString("5. 'ENTER' untuk mengembalikan tanaman ke inventory", x, y);
+            y += 20;
+            g2.drawString("6. 'SHIFT' untuk swap posisi plant di deck maupun inventory", x, y);
         }
 
         else if(menuScreenState == 2) {
