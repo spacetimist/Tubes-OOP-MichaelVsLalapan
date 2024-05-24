@@ -22,7 +22,7 @@ public class Menu<T extends Character>{
         this.g2 = g2;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
         String text = "PLANTS LIST";
-        int x = centerX(text);
+        int x = wp.state.centerX(text);
         int y = 40;
         g2.drawString(text, x, y);
         y += 30;
@@ -63,7 +63,7 @@ public class Menu<T extends Character>{
         this.g2 = g2;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
         String text = "ZOMBIES LIST";
-        int x = centerX(text);
+        int x = wp.state.centerX(text);
         int y = 40;
         g2.drawString(text, x, y);
         y += 30;
@@ -94,10 +94,5 @@ public class Menu<T extends Character>{
 //            g2.drawString("Aquatic: " + zombie.is_aquatic, x, y);
             y += 20;
         }
-    }
-    public int centerX(String text) {
-        int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        int x = wp.screenWidth/2 - length/2;
-        return x;
     }
 }
