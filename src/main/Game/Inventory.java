@@ -2,12 +2,9 @@ package main.Game;
 
 
 import main.GUI.KeyHandler;
-import main.GUI.State;
 import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 import main.Game.Plants.*;
-
-import java.security.Key;
 
 
 public class Inventory {

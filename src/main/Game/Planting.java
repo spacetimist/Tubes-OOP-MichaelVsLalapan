@@ -7,7 +7,6 @@ import main.Game.Plants.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.rmi.server.ServerNotActiveException;
 
 public class Planting {
     WindowPanel wp;
@@ -67,14 +66,15 @@ public class Planting {
                                         planted = true;
                                     } else if (!tileHasLilypad) {
                                         JOptionPane.showMessageDialog(dialog, "You have to put a Lilypad first.");
-                                    } else if (tileHasLilypad && tileHasPlant) {
+                                    } else {
                                         JOptionPane.showMessageDialog(dialog, "This area already has a plant.");
                                     }
                                 } else {
-                                    System.out.println(tileHasPlant);
                                     if (newPlant instanceof Lilypad) {
                                         JOptionPane.showMessageDialog(dialog, "Lilypad can only be planted in the pool area.");
                                     } else if (!tileHasPlant) {
+                                        newPlant.health += 100; // plant's health added by lilypad's health
+                                        System.out.printf("%s's health is added with Lilypad's health: %d\n", newPlant.name, newPlant.health);
                                         plantInTile(newPlant, currentTime);
                                         planted = true;
                                     } else {

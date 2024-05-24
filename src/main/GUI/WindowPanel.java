@@ -11,7 +11,6 @@ import main.Game.Zombies.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class WindowPanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
 
-    public int fps = 6;
+    public int fps = 3;
     public Map map = new Map(this);
     KeyHandler kh = new KeyHandler(this);
     Thread gameThread;
@@ -176,13 +175,13 @@ public class WindowPanel extends JPanel implements Runnable {
         }
     }
     public void update() {
-        if(gameState == inventoryState) {
-
-        }
         if(gameState == playState || gameState == plantingState) {
             for (Zombie zombie : ZombieList) {
                 zombie.update();
             }
+//            for (Zombie zombie : ZombieList) {
+//                // if hit by snowpea
+//            }
             for (Plant  plant : PlantList) {
                 plant.update();
             }
@@ -207,19 +206,19 @@ public class WindowPanel extends JPanel implements Runnable {
         if(gameState == playState || gameState == plantingState) {
             map.draw(g2);
 
+            state.draw(g2);
 
             for (Zombie zombie : ZombieList) {
                 zombie.draw(g2);
             }
-            state.draw(g2);
 
         }
         if(gameState == finished) {
             map.draw(g2);
+            state.draw(g2);
             for (Zombie zombie : ZombieList) {
                 zombie.draw(g2);
             }
-            state.draw(g2);
         }
 
         g2.dispose();

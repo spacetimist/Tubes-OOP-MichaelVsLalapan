@@ -13,4 +13,8 @@ public class BalloonZombie extends Zombie {
         attack_damage = 100;
         attack_speed = 1;
     }
-}
+    public void balloonPopped() {
+        getZombieImage("src/main/Resources/Zombies/noballoon.png");
+        balloonPopped = true;
+    }
+ }

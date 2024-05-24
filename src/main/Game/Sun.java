@@ -1,9 +1,6 @@
 package main.Game;
 
-import main.GUI.KeyHandler;
 import main.GUI.WindowPanel;
-import main.Game.ParentClass.Plant;
-import main.Game.Plants.*;
 import java.util.Random;
 
 import javax.imageio.ImageIO;

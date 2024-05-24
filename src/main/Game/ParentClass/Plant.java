@@ -2,6 +2,9 @@ package main.Game.ParentClass;
 
 import main.GUI.KeyHandler;
 import main.GUI.WindowPanel;
+import main.Game.Plants.Cactus;
+import main.Game.Plants.SnowPea;
+import main.Game.Zombies.BalloonZombie;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -65,15 +68,25 @@ public abstract class Plant extends Character {
             if (health > 0) {
                 if (range == -1) {
                     if (z.y + 30 == y) {
-                        z.health -= attack_damage;
-                        System.out.printf("%s's health: %d\n", z.name, z.health);
-                        if (z.health <= 0) {
-                            wp.ZombieList.remove(z);
-                            break;
+                        if (z instanceof BalloonZombie && !((BalloonZombie) z).balloonPopped) {
+                            // Ignore attack if it's a BalloonZombie and the balloon hasn't popped
+                            continue;
+                        }
+
+                        if (!(z instanceof BalloonZombie) || z.balloonPopped) {
+                            z.health -= attack_damage;
+                            System.out.printf("%s's health: %d\n", z.name, z.health);
+                            if (this instanceof SnowPea) {
+                                z.speedDecrease();
+                            }
+                            if (z.health <= 0) {
+                                wp.ZombieList.remove(z);
+                                break;
+                            }
                         }
                     }
                 } else if (range == 1) {
-                    if (z.x == this.x+60 && z.y+30 == this.y) {
+                    if (z.x == this.x + 60 && z.y + 30 == this.y) {
                         // Remove zombie when it is in the tile just before the plant
                         wp.ZombieList.remove(z);
                         System.out.printf("%s was instantly killed by %s\n", z.name, this.name);

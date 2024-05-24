@@ -1,10 +1,13 @@
 package main.GUI;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    JDialog dialog = new JDialog((Frame) null, "Invalid Input", true);
     WindowPanel wp;
 
     public KeyHandler(WindowPanel wp) {
@@ -56,7 +59,11 @@ public class KeyHandler implements KeyListener {
         }
         if(wp.gameState == wp.inventoryState) {
             if(code == KeyEvent.VK_S) {
-                wp.gameState = wp.playState;
+                if(wp.Deck.size() == 6) {
+                    wp.gameState = wp.playState;
+                }else {
+                    JOptionPane.showMessageDialog(dialog, "You need 6 plants on deck");
+                }
             }
             if(code == KeyEvent.VK_UP) {
                 if(wp.state.Row != 0) {
@@ -104,7 +111,11 @@ public class KeyHandler implements KeyListener {
         }
         if(wp.gameState == wp.deckState) {
             if(code == KeyEvent.VK_S) {
-                wp.gameState = wp.playState;
+                if(wp.Deck.size() == 6) {
+                    wp.gameState = wp.playState;
+                }else {
+                    JOptionPane.showMessageDialog(dialog, "You need 6 plants on deck");
+                }
             }
             if(code == KeyEvent.VK_LEFT) {
                 if(wp.state.Col != 0) {

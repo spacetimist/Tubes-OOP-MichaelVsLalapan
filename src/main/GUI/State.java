@@ -44,16 +44,17 @@ public class State {
             String text = "";
             int textLength, x, y;
             g2.setFont(f2);
-            g2.setColor(Color.YELLOW);
             if(win) {
+                g2.setColor(Color.YELLOW);
                 text = "You Win!";
             }
             if(lose) {
-                text = "You Lose...";
+                g2.setColor(Color.RED);
+                text = "Game Over";
             }
             textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
             x = wp.screenWidth/2 - textLength/2;
-            y = wp.screenWidth/2 - (wp.tileSize*3);
+            y = wp.screenWidth/2 - wp.tileSize;
             drawPlant(g2);
             playTime();
             g2.drawString(text, x, y);
