@@ -6,7 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed = false;
+    public boolean shiftPressed = false;
     JDialog dialog = new JDialog((Frame) null, "Invalid Input", true);
     WindowPanel wp;
 
@@ -91,6 +92,9 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_D) {
                 wp.gameState = wp.deckState;
             }
+            if (code == KeyEvent.VK_SHIFT) {
+                wp.swapPositionInputDialog();
+            }
         }
         if(wp.gameState == wp.playState) {
             if(code == KeyEvent.VK_LEFT) {
@@ -133,6 +137,9 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_I) {
                 wp.gameState = wp.inventoryState;
             }
+            if (code == KeyEvent.VK_SHIFT) {
+                wp.swapPositionInputDialog();
+            }
         }
         if(wp.gameState == wp.plantingState) {
             if(code == KeyEvent.VK_SPACE) {
@@ -160,6 +167,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_RIGHT) {
             rightPressed = false;
+        }
+        if (code == KeyEvent.VK_SHIFT) {
+            shiftPressed = false;
         }
     }
 }

@@ -32,7 +32,7 @@ public class State {
     public State(WindowPanel wp) {
         this.wp = wp;
         f1 = new Font(Font.SANS_SERIF, Font.PLAIN, 40);
-        f2 = new Font(Font.SANS_SERIF, Font.PLAIN, 40);
+        f2 = new Font(Font.SANS_SERIF, Font.PLAIN, 80);
     }
 
     public void draw(Graphics2D g2) {
@@ -61,6 +61,10 @@ public class State {
         }
 
         if(wp.gameState == wp.playState) {
+            drawDeck();
+            deckX = 2*wp.tileSize;
+            deckY = 7*wp.tileSize;
+            drawCursor(deckX, deckY);
             drawPlant(g2);
             drawSun();
             playTime();

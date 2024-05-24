@@ -6,10 +6,14 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 import main.Game.Plants.*;
 
+import javax.swing.*;
+import java.awt.*;
+
 
 public class Inventory {
     WindowPanel wp;
     KeyHandler kh;
+    JDialog dialog = new JDialog((Frame) null, "Input Variables", true);
     public Inventory(WindowPanel wp) {
         this.wp = wp;
     }
@@ -38,6 +42,34 @@ public class Inventory {
             }
         }
     }
+
+    public void swapPosition(int index1, int index2) {
+        index1 -= 1;
+        index2 -= 1;
+
+        if(wp.gameState == wp.deckState) {
+            // Pastikan kedua indeks berada dalam rentang yang benar
+            if (index1 >= 0 && index1 < wp.Deck.size() && index2 >= 0 && index2 < wp.Deck.size()) {
+                // Lakukan pertukaran posisi
+                Plant temp = wp.Deck.get(index1);
+                wp.Deck.set(index1, wp.Deck.get(index2));
+                wp.Deck.set(index2, temp);
+            } else {
+                JOptionPane.showMessageDialog(dialog, "Index must be between 1 and " + (wp.Deck.size()));
+            }
+        }else if(wp.gameState == wp.inventoryState) {
+            // Pastikan kedua indeks berada dalam rentang yang benar
+            if (index1 >= 0 && index1 < wp.Inventory.size() && index2 >= 0 && index2 < wp.Inventory.size()) {
+                // Lakukan pertukaran posisi
+                Plant temp = wp.Inventory.get(index1);
+                wp.Inventory.set(index1, wp.Inventory.get(index2));
+                wp.Inventory.set(index2, temp);
+            } else {
+                JOptionPane.showMessageDialog(dialog, "Index must be between 1 and " + (wp.Inventory.size()));
+            }
+        }
+    }
+
 
     public void removeFromDeck() {
         for(Plant plant : wp.Deck) {

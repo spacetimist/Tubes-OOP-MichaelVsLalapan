@@ -79,7 +79,7 @@ public abstract class Zombie extends Character implements SpeedChange {
                 // Zombie melompati tanaman pertama yang ditemui dan menghancurkannya
                 wp.map.hasPlant[plant.x / 60][plant.y / 60] = false;
                 wp.PlantList.remove(index);
-                this.x -= 2*wp.tileSize;
+                this.x -= wp.tileSize;
                 this.hasJumped = true;
                 System.out.printf("%s jumped over and killed %s\n", this.name, plant.name);
             } else {
@@ -109,9 +109,6 @@ public abstract class Zombie extends Character implements SpeedChange {
     public void draw(Graphics2D g2) {
         BufferedImage image = img;
             g2.drawImage(image, x, y, wp.tileSize, (wp.tileSize)+30, null);
-        if(this instanceof BalloonZombie && balloonPopped) {
-            g2.drawImage(image, x, y, wp.tileSize, (wp.tileSize), null);
-        }
     }
 
     @Override
@@ -127,7 +124,7 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     @Override
     public void speedIncrease() {
-        speed = 4;
+        speed = 3;
     }
 
     public void resetSpeed() {
