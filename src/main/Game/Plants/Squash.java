@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class Squash extends Plant {
-    public Squash(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public Squash(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/squash.png");
         name = "Squash";
         description = "Tanaman spesial yang dapat melakukan instant-kill.";

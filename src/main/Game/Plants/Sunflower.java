@@ -6,8 +6,8 @@ import main.Game.ParentClass.Plant;
 public class Sunflower extends Plant {
     private long lastSunGenerationTime;
     WindowPanel wp;
-    public Sunflower(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public Sunflower(WindowPanel wp) {
+        super(wp);
         this.wp = wp;
         getPlantImage("src/main/Resources/Plants/sunflower.png");
         name = "Sunflower";

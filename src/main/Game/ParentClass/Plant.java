@@ -13,15 +13,13 @@ import java.io.IOException;
 
 public abstract class Plant extends Character {
     WindowPanel wp;
-    KeyHandler kh;
     // attributes
     public int cost, range, cooldown;
     public long lastPlantedTime;
     public long lastAttackTime;
 
-    public Plant(WindowPanel wp, KeyHandler kh) {
+    public Plant(WindowPanel wp) {
         this.wp = wp;
-        this.kh = kh;
         collision = true;
 
         solidArea = new Rectangle(0, 0, 60, 60);
@@ -84,10 +82,12 @@ public abstract class Plant extends Character {
                     }
                 } else if (range == 1) {
                     if (z.x == this.x + 60 && z.y + 30 == this.y) {
-                        // Remove zombie when it is in the tile just before the plant
-                        wp.ZombieList.remove(z);
-                        System.out.printf("%s was instantly killed by %s\n", z.name, this.name);
-                        break;
+                        if (!(z instanceof BalloonZombie) || z.balloonPopped) {
+                            // Remove zombie when it is in the tile just before the plant
+                            wp.ZombieList.remove(z);
+                            System.out.printf("%s was instantly killed by %s\n", z.name, this.name);
+                            break;
+                        }
                     }
                 }
             }

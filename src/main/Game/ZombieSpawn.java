@@ -21,50 +21,8 @@ public class ZombieSpawn extends Thread {
         random = new Random();
     }
 
-    public void set() {
-        spawnBatch();
-
-    }
-
     public void spawnBatch() {
-//        int j;
-//        int i;
-//        wp.ZombieList.add(generateRandomZombie()); // Menghasilkan zombie secara acak
-//        for (Zombie zombie : wp.ZombieList) {
-//            j = 0;
-//            i = 0;
-//
-//            while (i < 6) {
-//                if (random.nextInt(3) == 0) {
-//                    if (zombie.is_aquatic) {
-//                        if (i != 2 && i != 3) {
-//                            while (zombie.is_aquatic) {
-//                                zombie = generateRandomZombie();
-//                            }
-//                        }
-//                        zombie.setDefaultValues(lane[i]);
-//                        wp.Batch[j] = zombie;
-//                    } else {
-//                        if (i == 2 || i == 3) {
-//                            while (!zombie.is_aquatic) {
-//                                zombie = generateRandomZombie();
-//                            }
-//                        }
-//                        zombie.setDefaultValues(lane[i]);
-//                        wp.Batch[j] = zombie;
-//                    }
-//                    j++;
-//                    if (j == i) {
-//                        j = 0;
-////                        this.set();
-//                    }
-//                }
-//                i++;
-//                System.out.println(i);
-//                System.out.println(j);
-//            }
-//        }
-        if(wp.ZombieList.size() < 7 && wp.state.playTime >= 20 && wp.state.playTime <= 160) {
+        if(wp.ZombieList.size() < 7 && (wp.state.playTime % 200) >= 20 && (wp. state.playTime % 200) <= 160) {
             int j = 0;
             for (int i = 0; i < 6; i++) {
                 // Cek apakah zombie sesuai dengan lane

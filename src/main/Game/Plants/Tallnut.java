@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class Tallnut extends Plant {
-    public Tallnut(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public Tallnut(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/tallnut.png");
         // biar lebih tinggi
 

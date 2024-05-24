@@ -12,23 +12,22 @@ import java.awt.*;
 
 public class Inventory {
     WindowPanel wp;
-    KeyHandler kh;
     JDialog dialog = new JDialog((Frame) null, "Input Variables", true);
     public Inventory(WindowPanel wp) {
         this.wp = wp;
     }
 
     public void set() {
-        wp.Inventory.add(new Cactus(wp, kh));
-        wp.Inventory.add(new Jalapeno(wp, kh));
-        wp.Inventory.add(new Lilypad(wp, kh));
-        wp.Inventory.add(new PeaShooter(wp, kh));
-        wp.Inventory.add(new Repeater(wp, kh));
-        wp.Inventory.add(new SnowPea(wp, kh));
-        wp.Inventory.add(new Squash(wp, kh));
-        wp.Inventory.add(new Sunflower(wp, kh));
-        wp.Inventory.add(new Tallnut(wp, kh));
-        wp.Inventory.add(new Wallnut(wp, kh));
+        wp.Inventory.add(new Cactus(wp));
+        wp.Inventory.add(new Jalapeno(wp));
+        wp.Inventory.add(new Lilypad(wp));
+        wp.Inventory.add(new PeaShooter(wp));
+        wp.Inventory.add(new Repeater(wp));
+        wp.Inventory.add(new SnowPea(wp));
+        wp.Inventory.add(new Squash(wp));
+        wp.Inventory.add(new Sunflower(wp));
+        wp.Inventory.add(new Tallnut(wp));
+        wp.Inventory.add(new Wallnut(wp));
     }
     public void deck() {
         for(Plant plant : wp.Inventory) {

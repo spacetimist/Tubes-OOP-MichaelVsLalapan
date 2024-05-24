@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class Cactus extends Plant {
-    public Cactus(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public Cactus(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/cactus.png");
         name = "Cactus";
         description = "Tanaman yang dapat memecahkan balon di punggung balloon zombie.";

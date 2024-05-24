@@ -9,8 +9,6 @@ import main.Game.Plants.*;
 import main.Game.Zombies.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,16 +76,16 @@ public class WindowPanel extends JPanel implements Runnable {
     }
 
     public void initializeCharacters() {
-        plantList.add(new Cactus(this, kh));
-        plantList.add(new Jalapeno(this, kh));
-        plantList.add(new Lilypad(this, kh));
-        plantList.add(new PeaShooter(this, kh));
-        plantList.add(new Repeater(this, kh));
-        plantList.add(new SnowPea(this, kh));
-        plantList.add(new Squash(this, kh));
-        plantList.add(new Sunflower(this, kh));
-        plantList.add(new Tallnut(this, kh));
-        plantList.add(new Wallnut(this, kh));
+        plantList.add(new Cactus(this));
+        plantList.add(new Jalapeno(this));
+        plantList.add(new Lilypad(this));
+        plantList.add(new PeaShooter(this));
+        plantList.add(new Repeater(this));
+        plantList.add(new SnowPea(this));
+        plantList.add(new Squash(this));
+        plantList.add(new Sunflower(this));
+        plantList.add(new Tallnut(this));
+        plantList.add(new Wallnut(this));
 
         zombieList.add(new BalloonZombie(this));
         zombieList.add(new BucketheadZombie(this));
@@ -126,17 +124,14 @@ public class WindowPanel extends JPanel implements Runnable {
         submitButton.setBounds(100, 100, 80, 25);
         dialog.add(submitButton);
 
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    xValue = Integer.parseInt(xField.getText());
-                    yValue = Integer.parseInt(yField.getText());
-                    System.out.println("x: " + xValue + ", y: " + yValue);  // Cetak nilai ke konsol
-                    dialog.dispose();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(dialog, "Please enter valid integers.");
-                }
+        submitButton.addActionListener(e -> {
+            try {
+                xValue = Integer.parseInt(xField.getText());
+                yValue = Integer.parseInt(yField.getText());
+                System.out.println("x: " + xValue + ", y: " + yValue);  // Cetak nilai ke konsol
+                dialog.dispose();
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(dialog, "Please enter valid integers.");
             }
         });
 
@@ -169,18 +164,15 @@ public class WindowPanel extends JPanel implements Runnable {
         submitButton.setBounds(100, 100, 80, 25);
         dialog.add(submitButton);
 
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    int index1 = Integer.parseInt(indexField1.getText());
-                    int index2 = Integer.parseInt(indexField2.getText());
-                    System.out.println("Swap index " + index1 + " with " + index2);  // Cetak indeks ke konsol
-                    inv.swapPosition(index1, index2); // Panggil metode untuk menukar posisi
-                    dialog.dispose();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(dialog, "Please enter valid indexes.");
-                }
+        submitButton.addActionListener(e -> {
+            try {
+                int index1 = Integer.parseInt(indexField1.getText());
+                int index2 = Integer.parseInt(indexField2.getText());
+                System.out.println("Swap index " + index1 + " with " + index2);  // Cetak indeks ke konsol
+                inv.swapPosition(index1, index2); // Panggil metode untuk menukar posisi
+                dialog.dispose();
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(dialog, "Please enter valid indexes.");
             }
         });
 

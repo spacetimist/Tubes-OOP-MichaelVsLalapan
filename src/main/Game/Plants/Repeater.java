@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class Repeater extends Plant {
-    public Repeater(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public Repeater(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/repeater.png");
         name = "Repeater";
         description = "Tanaman dengan attack damage 2 kali lebih besar daripada peashooter.";

@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class Lilypad extends Plant {
-    public Lilypad(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public Lilypad(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/lilypad.png");
         name = "Lilypad";
         description = "Tanaman spesial yang menjadi media tanam untuk tanaman lain.";

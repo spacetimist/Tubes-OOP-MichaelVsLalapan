@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Zombie extends Character implements SpeedChange {
-    public double speed = 2;
+    public double speed;
     public double originalSpeed;
     WindowPanel wp;
 
@@ -32,6 +32,7 @@ public abstract class Zombie extends Character implements SpeedChange {
         solidArea = new Rectangle(20, 40, 48, 48);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        speed = 2;
         setDefaultValues(1);
     }
 
@@ -113,7 +114,7 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     @Override
     public void speedDecrease() {
-        speed /= 2;
+        this.speed /= 2;
 
         // if hit by snowpea
         lastSnowPeaHitTime = System.currentTimeMillis();
@@ -124,7 +125,7 @@ public abstract class Zombie extends Character implements SpeedChange {
 
     @Override
     public void speedIncrease() {
-        speed = 3;
+        speed *= 2;
     }
 
     public void resetSpeed() {

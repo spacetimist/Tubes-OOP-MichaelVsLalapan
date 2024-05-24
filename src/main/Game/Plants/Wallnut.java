@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class Wallnut extends Plant {
-    public Wallnut(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public Wallnut(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/wallnut.png");
         name = "Wall nut";
         description = "Tanaman pertahanan yang tidak dapat menyerang balik.";

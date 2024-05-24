@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class Jalapeno extends Plant {
-    public Jalapeno(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public Jalapeno(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/jalapeno.png");
         name = "Jalapeno";
         description = "Tanaman yang akan menghabisi semua zombie yang ada di barisan tersebut.";

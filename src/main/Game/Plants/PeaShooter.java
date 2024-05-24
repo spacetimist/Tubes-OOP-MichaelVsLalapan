@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class PeaShooter extends Plant {
-    public PeaShooter(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public PeaShooter(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/peashooter.png");
         name = "Peashooter";
         description = "Tanaman yang dapat menembak zombie yang sebaris dengannya.";

@@ -57,7 +57,7 @@ public class Planting {
                                         if (!tileHasLilypad) {
                                             plantInTile(newPlant, currentTime);
                                             wp.map.hasLilypad[wp.xValue][wp.yValue] = true;
-//                                            planted = true;
+                                            plant.lastPlantedTime = currentTime;
                                         } else {
                                             JOptionPane.showMessageDialog(dialog, "There's already a Lilypad here.");
                                         }
@@ -97,16 +97,16 @@ public class Planting {
     }
 
     private Plant createNewPlantInstance(Plant plant) {
-        if (plant instanceof Cactus) return new Cactus(wp, kh);
-        if (plant instanceof Jalapeno) return new Jalapeno(wp, kh);
-        if (plant instanceof Lilypad) return new Lilypad(wp, kh);
-        if (plant instanceof PeaShooter) return new PeaShooter(wp, kh);
-        if (plant instanceof Repeater) return new Repeater(wp, kh);
-        if (plant instanceof SnowPea) return new SnowPea(wp, kh);
-        if (plant instanceof Squash) return new Squash(wp, kh);
-        if (plant instanceof Sunflower) return new Sunflower(wp, kh);
-        if (plant instanceof Tallnut) return new Tallnut(wp, kh);
-        if (plant instanceof Wallnut) return new Wallnut(wp, kh);
+        if (plant instanceof Cactus) return new Cactus(wp);
+        if (plant instanceof Jalapeno) return new Jalapeno(wp);
+        if (plant instanceof Lilypad) return new Lilypad(wp);
+        if (plant instanceof PeaShooter) return new PeaShooter(wp);
+        if (plant instanceof Repeater) return new Repeater(wp);
+        if (plant instanceof SnowPea) return new SnowPea(wp);
+        if (plant instanceof Squash) return new Squash(wp);
+        if (plant instanceof Sunflower) return new Sunflower(wp);
+        if (plant instanceof Tallnut) return new Tallnut(wp);
+        if (plant instanceof Wallnut) return new Wallnut(wp);
         return null;
     }
 

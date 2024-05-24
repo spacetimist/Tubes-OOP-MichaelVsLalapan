@@ -4,8 +4,8 @@ import main.GUI.WindowPanel;
 import main.Game.ParentClass.Plant;
 
 public class SnowPea extends Plant {
-    public SnowPea(WindowPanel wp, KeyHandler kh) {
-        super(wp, kh);
+    public SnowPea(WindowPanel wp) {
+        super(wp);
         getPlantImage("src/main/Resources/Plants/snowpea.png");
         name = "Snow pea";
         description = "Tanaman spesial yang memiliki kemampuan slowing.";
